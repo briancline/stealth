@@ -1,0 +1,9 @@
+HELP on CLONE                            Level %L
+
+  Syntax: /msg %N clone <nick> <ident> <host name> <real name>
+
+ Example: /msg %N clone W cservice ircplanet.net Please use X
+
+   Usage: Creates a fake user on the network. Ideal for letting users know
+          which service bot to use. Any clones created with this command will
+          be saved and loaded next time stealth is run.

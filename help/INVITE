@@ -1,0 +1,7 @@
+HELP on INVITE                            Level %L
+
+  Syntax: /msg %N invite <channel>
+
+ Example: /msg %N invite #idle
+
+   Usage: Invites you to a channel.

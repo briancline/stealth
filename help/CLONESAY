@@ -1,0 +1,7 @@
+HELP on CLONESAY                            Level %L
+
+  Syntax: /msg %N clonesay <clone nick> <channel> <text>
+
+ Example: /msg %N clonesay W #idle You're a nut.
+
+   Usage: Causes a cloned user to send the specified message to a channel.

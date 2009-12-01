@@ -1,0 +1,7 @@
+HELP on KICK                            Level %L
+
+  Syntax: /msg %N kick <channel> <nick> <reason>
+
+ Example: /msg %N kick #idle ksart No clones
+
+   Usage: Kicks a user from the specified channel.

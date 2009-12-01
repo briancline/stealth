@@ -1,0 +1,7 @@
+HELP on LOGIN                            Level %L
+
+  Syntax: /msg %N login <username> <password>
+
+ Example: /msg %N login trask coolpass
+
+   Usage: Allows a user to log in to an account.

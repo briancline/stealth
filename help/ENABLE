@@ -1,0 +1,7 @@
+HELP on ENABLE                            Level %L
+
+  Syntax: /msg %N enable <command name>
+
+ Example: /msg %N enable clonesay
+
+   Usage: Enables a disabled command so that it may be used again.

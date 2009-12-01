@@ -1,0 +1,7 @@
+HELP on DEOP                            Level %L
+
+  Syntax: /msg %N deop <channel> [nick1 nick2 nick3 ...]
+
+ Example: /msg %N deop #idle brian W
+
+   Usage: Deops the specified users on a channel.

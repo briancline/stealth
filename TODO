@@ -1,0 +1,16 @@
+* Find better way to store and call timer functions (like from the Network class)
+
+* Use "proper" case for first letter in class functions & methods and prefixes of
+  private members
+
+* Keep track of earliest TS on the network
+
+* Add code for clonegline command
+
+* Use a notice function instead of Net->Send("%s O %s :bla\n");
+
+* Add SQL Backend
+
+* Write better event logging system (read: less-sloppy)
+
+* Reorganize design

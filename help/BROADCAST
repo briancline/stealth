@@ -1,0 +1,9 @@
+HELP on BROADCAST                            Level %L
+
+  Syntax: /msg %N broadcast <message to broadcast>
+
+ Example: /msg %N broadcast Over the next few minutes we will be rerouting a few servers, so there will be a few splits but will return shortly. Thank you for your patience.
+
+   Usage: Sends a broadcast notice to every client connected to the network.
+          Ideal for sending messages about planned services outages or major
+          rerouting that may cause several splits.

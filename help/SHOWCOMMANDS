@@ -1,0 +1,7 @@
+HELP on SHOWCOMMANDS                            Level %L
+
+  Syntax: /msg %N showcommands
+
+ Example: /msg %N showcommands
+
+   Usage: Shows you a list of all commands you have access to.

@@ -1,0 +1,8 @@
+HELP on GLINE                            Level %L
+
+  Syntax: /msg %N gline <mask> <duration> <reason>
+
+ Example: /msg %N gline *@*.aol.com 172800 Lamers
+
+   Usage: Sets a g-line for <duration> seconds on the specified mask, along
+          with the reason specified.

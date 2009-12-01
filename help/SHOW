@@ -1,0 +1,19 @@
+HELP on SHOW                            Level %L
+
+  Syntax: /msg %N show <parameter name>
+
+ Example: /msg %N show servers
+
+   Usage: Shows information about various parts of the network.
+
+          The valid parameters are as follows:
+                OPERS  - lists all opers currently signed on
+                JUPES  - shows all effective jupes
+              SERVERS  - shows a list of all servers
+               GLINES  - shows all glines
+             USERLIST  - outputs the entire access list
+               CLONES  - shows all clones connected to the network
+                 LOAD  - shows server and network userload
+             DISABLED  - shows all disabled commands
+                STATS  - lists quantitative statistics for various
+                         maps in memory

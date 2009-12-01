@@ -1,0 +1,8 @@
+HELP on DISABLE                            Level %L
+
+  Syntax: /msg %N disable <command name>
+
+ Example: /msg %N disable clonesay
+
+   Usage: Temporarily disables a command until it is re-enabled.
+          Note that all disabled commands are re-enabled upon startup.

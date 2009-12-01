@@ -1,0 +1,9 @@
+HELP on LOGOUT                            Level %L
+
+  Syntax: /msg %N logout
+
+ Example: /msg %N logout
+
+   Usage: Remove's a user's authorization from memory. Note that, due to account
+          features in 2.10.11, this will not clear the user's account name from
+          the network.

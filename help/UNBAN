@@ -1,0 +1,7 @@
+HELP on UNBAN                            Level %L
+
+  Syntax: /msg %N unban <channel> <host masks>
+
+ Example: /msg %N unban #idle *!*@*.aol.com
+
+   Usage: Unbans the specified masks from a channel.

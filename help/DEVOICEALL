@@ -1,0 +1,7 @@
+HELP on DEVOICEALL                            Level %L
+
+  Syntax: /msg %N devoiceall <channel>
+
+ Example: /msg %N devoiceall #idle
+
+   Usage: Devoices all users on a channel.

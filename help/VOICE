@@ -1,0 +1,7 @@
+HELP on VOICE                            Level %L
+
+  Syntax: /msg %N voice <channel> <nick> [nick2 nick3 ...]
+
+ Example: /msg %N voice #idle nex brian
+
+   Usage: Voices the specified users in a channel.

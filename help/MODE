@@ -1,0 +1,8 @@
+HELP on MODE                            Level %L
+
+  Syntax: /msg %N mode <channel> <modes> [parameters]
+
+ Example: /msg %N mode #idle -i+k secret
+
+   Usage: Sets modes on a channel. This command accepts nicknames (NOT numerics)
+          for +o and +v, and can also set bans.

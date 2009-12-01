@@ -1,0 +1,23 @@
+STEALTH OPERATOR SERVICE v1.0
+Written by Brian A. Cline <clineb@cs.winthrop.edu>
+
+Released: Saturday, June 8, 2002
+--------------------------------------------------------------------------------
+
+STEALTH OPERATOR SERVICE (SOS) is an IRC operator service for ircu2.10.11 
+written in C++ for Linux/UNIX platforms. It is not part of a greater package and
+it does not require any sort of SQL database in order to run; it simply uses
+files to store data.
+
+The official distribution site for SOS is located at:
+	http://stealth.ircplanet.net/
+
+Should you have any questions, concerns, suggestions, or any sort of other
+feedback, send them via e-mail to stealth@ircplanet.net. Do not send flames
+if you expect any sort of reply--if you'd like to flame, do it objectively
+and rationally. And please do not send e-mails in HTML, because HTML e-mail
+just is not a good idea. :)
+
+
+Brian A. Cline
+June 2002

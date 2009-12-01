@@ -1,0 +1,9 @@
+HELP on REFRESHG                            Level %L
+
+  Syntax: /msg %N refreshg
+
+ Example: /msg %N refreshg
+
+   Usage: Resends all g-lines to the network. Ideal if your network does
+          not have g-line synchronization during bursts and a new server
+          does not know about effective g-lines.

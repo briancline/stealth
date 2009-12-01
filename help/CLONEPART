@@ -1,0 +1,7 @@
+HELP on CLONEPART                            Level %L
+
+  Syntax: /msg %N clonepart <clone nick> <channel>
+
+ Example: /msg %N clonepart W #idle
+
+   Usage: Causes a cloned user to part a channel, if it exists. 

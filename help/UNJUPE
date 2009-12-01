@@ -1,0 +1,8 @@
+HELP on UNJUPE                            Level %L
+
+  Syntax: /msg %N unjupe <server name>
+
+ Example: /msg %N unjupe Montreal.QC.CA.Virtuanet.org
+
+   Usage: Removes a jupe from the network. Please see the warnings for
+          2.10.11-style jupes via /msg %N help jupe

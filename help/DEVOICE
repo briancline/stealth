@@ -1,0 +1,7 @@
+HELP on DEVOICE                            Level %L
+
+  Syntax: /msg %N devoice <channel> <nick> [nick2 nick3 ...]
+
+ Example: /msg %N devoice #idle brian deku nightthun
+
+   Usage: Devoices the specified users on a channel.

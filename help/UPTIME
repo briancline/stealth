@@ -1,0 +1,7 @@
+HELP on UPTIME                            Level %L
+
+  Syntax: /msg %N uptime
+
+ Example: /msg %N uptime
+
+   Usage: Shows the bot's uptime.

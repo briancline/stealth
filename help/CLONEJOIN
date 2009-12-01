@@ -1,0 +1,7 @@
+HELP on CLONEJOIN                            Level %L
+
+  Syntax: /msg %N clonejoin <clone nick> <channel>
+
+ Example: /msg %n clonejoin W #idle
+
+   Usage: Causes a cloned user to join a channel. It will not op itself.

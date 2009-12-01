@@ -1,0 +1,8 @@
+HELP on SET                            Level %L
+
+  Syntax: /msg %N set <parameter name> <new value>
+
+ Example: /msg %N set gender I am transgendered! Beat that!
+
+   Usage: Sets any configuration value immediately that would normally be
+          set from within the configuration file. Use this carefully.

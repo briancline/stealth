@@ -1,0 +1,10 @@
+HELP on WHOIS                            Level %L
+
+  Syntax: /msg %N whois <nick>
+
+ Example: /msg %N whois brian
+
+   Usage: Shows all information about a user, including numeric, modes,
+          real name, full nick!user@host, ip address and base64-encoded
+          ip address, signon time, and channels the user is in (with
+          op and voice flags included).

@@ -1,0 +1,7 @@
+HELP on REMGLINE                            Level %L
+
+  Syntax: /msg %N remgline <gline mask>
+
+ Example: /msg %N remgline *@*.aol.com
+
+   Usage: Removes a set g-line.

@@ -1,0 +1,8 @@
+HELP on CHANLIST                            Level %L
+
+  Syntax: /msg %N chanlist <mask to match>
+
+ Example: /msg %N chanlist *warez*
+
+   Usage: Shows a list of channels matching the search mask, including the
+          current channel modes and user count.

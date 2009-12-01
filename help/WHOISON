@@ -1,0 +1,8 @@
+HELP on WHOISON                            Level %L
+
+  Syntax: /msg %N whoison <channel>
+
+ Example: /msg %N whoison #idle
+
+   Usage: Shows a list of users who are on a channel, with appropriate
+          voice and op flags.

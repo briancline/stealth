@@ -1,0 +1,7 @@
+HELP on WRITE                            Level %L
+
+  Syntax: /msg %N write
+
+ Example: /msg %N write
+
+   Usage: Saves all information to disk.

@@ -1,0 +1,7 @@
+HELP on OPERMSG                            Level %L
+
+  Syntax: /msg %N opermsg <text to send>
+
+ Example: /msg %N opermsg Rerouting SanJose to Austin, any objections?
+
+   Usage: Sends a notice to all online opers.

@@ -1,0 +1,16 @@
+HELP on CLEARCHAN                            Level %L
+
+  Syntax: /msg %N clearchan <channel> <parameters>
+
+ Example: /msg %N clearchan #idle mbvo
+
+   Usage: Clears a channel of either ops, modes, voiced users, bans, kicks all
+          users, or glines all users -- or any combination of the above.
+          
+          Valid flags are the following:
+             m: clears all channel modes
+             k: kicks all users
+             o: deops all users
+             v: voices all users
+             b: clears all bans
+             g: g-lines all users

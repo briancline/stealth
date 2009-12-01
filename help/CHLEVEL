@@ -1,0 +1,7 @@
+HELP on CHLEVEL                            Level %L
+
+  Syntax: /msg %N chlevel <command name> <new level>
+
+ Example: /msg %N chlevel die 999
+
+   Usage: Changes the access level of a command.

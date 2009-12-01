@@ -1,0 +1,10 @@
+HELP on REOP                            Level %L
+
+  Syntax: /msg %N reop <bot nick>
+
+ Example: /msg %N reop X
+
+   Usage: Reops a service bot on ALL channels it is currently in.
+          Note that the user you wish to grant network-wide chanops to
+          MUST have the +k usermode set on itself. Ideal for restoring
+          ops to a service bot after or during a desynch.

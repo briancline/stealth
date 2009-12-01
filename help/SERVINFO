@@ -1,0 +1,10 @@
+HELP on SERVINFO                            Level %L
+
+  Syntax: /msg %N servinfo <server mask>
+
+ Example: /msg %N servinfo RockHill-R.SC*
+          /msg %N servinfo RockHill-R.SC.US.Virtuanet.org
+
+   Usage: Shows information about any servers that match the search mask,
+          including numeric, the numeric of the next user to sign on,
+          and the maximum number of users it can hold.

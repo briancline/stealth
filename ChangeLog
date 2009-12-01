@@ -1,0 +1,3200 @@
+2002-07-13  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* include/version.h (VERSION_PATCH): Increment patchlevel.
+
+	* src/c_enable.cc (cmd_ENABLE): Fix a bug that wasn't REALLY enabling
+	disabled commands.
+
+	* src/m_quit.cc (msg_QUIT): Make sure we still have the nick available
+	in memory before reporting the quit in the info channel. Otherwise,
+	it will show the numeric, which would be useless in most cases.
+
+2002-06-24  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* include/version.h (VERSION_PATCH): Bump the patchlevel up
+
+	* src/c_chname.cc (cmd_CHNAME): Fix a typo.
+
+	* dbfiles/commands.dat: Added CHLEVEL and CHNAME lines.
+
+	* help/CHLEVEL: Added help for CHLEVEL.
+
+	* help/CHNAME: Added help for CHNAME.
+
+	* include/cmdmap.h (PrivMsgTabType): Made the CmdEnabled switch a boolean
+	value instead of an integer value. There is no difference in functionality,
+	but its better for the code's sake.
+
+	* include/events.h: Added CMD_CHLEVEL and CMD_CHNAME events.
+
+	* include/version.h (VERSION_PATCH): Bump patchlevel up
+
+	* src/Makefile: Added c_chlevel.o and c_chname.o to the file listing and
+	added necessary compile info for these two files.
+
+	* src/c_chlevel.cc (cmd_CHLEVEL): Added the CHLEVEL command to allow for
+	moving commands to different levels.
+
+	* src/c_chname.cc (cmd_CHNAME): Added the CHNAME command to allow for
+	renaming commands. Very simple.
+
+	* src/c_disable.cc (cmd_DISABLE): Made appropriate changes for the now 
+	boolean CmdEnabled.
+
+	* src/c_enable.cc (cmd_ENABLE): Made appropriate changes for the now boolean
+	CmdEnabled.
+
+	* src/c_show.cc (cmd_SHOW): Made appropriate changes for the now boolean
+	CmdEnabled.
+
+	* src/c_showcommands.cc (cmd_SHOWCOMMANDS): Made appropriate changes for the
+	now boolean CmdEnabled. Also, since names of commands can now be changed,
+	this function will sort each level's command listing alphabetically. This
+	has been tested extensively and works.
+
+	* src/cmdmap.cc: Added CHLEVEL and CHNAME command items. Both are level 900
+	commands by default.
+
+	* src/config.cc (LoadCommands): Fixed a bug that was grabbing the wrong
+	parameters from commands.dat, and also did a case-insensitive comparison
+	just in case the need should ever arise.
+
+	* src/events.cc: Added definitions for the new CMD_CHLEVEL and CMD_CHNAME
+	events.
+
+	* src/m_privmsg.cc (msg_P): Made appropriate changes for the now boolean
+	CmdEnabled.
+
+2002-06-23  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* include/version.h (PATCHLEVEL): bump the patchlevel up.
+	
+	* include/cmdmap.h: Added a string to keep track of a command's public name.
+	CmdName will now be used internally so that no matter what, stealth will
+	always know what a renamed command *really* refers to.
+
+	* include/config.h: Added LoadCommands and SaveCommands prototypes.
+
+	* src/c_disable.cc (cmd_DISABLE): Modified to work with public command names
+	rather than internal names.
+
+	* src/c_enable.cc (cmd_ENABLE): Modified to work with public command names
+	rather than internal names.
+
+	* src/c_help.cc (cmd_HELP): Modified to work with public command names rather
+	than internal names.
+
+	* src/c_show.cc (cmd_SHOW): Modified to work with public command names rather
+	than internal names.
+
+	* src/c_showcommands.cc (cmd_SHOWCOMMANDS): Modified to work with public
+	command names rather than internal names.
+
+	* src/cmdmap.cc (PrivMsgTab): Added text for CmdPubName (public name) for
+	each command.
+
+	* src/config.cc (LoadConfiguration): Convert integer returns to bool 
+	returns.
+
+	* src/config.cc (LoadUsers): Convert integer returns to bool returns.
+
+	* src/config.cc (LoadJupes): Convert integer returns to bool returns.
+
+	* src/config.cc (LoadClones): Convert integer returns to bool returns.
+
+	* src/config.cc (LoadChans): Convert integer returns to bool returns.
+
+	* src/config.cc (LoadCommands): Added function to load command level and
+	disable/enable information from DATADIR/commands.dat.
+
+	* src/config.cc (SaveCommands): Added function to save command level and
+	disable/enable information to DATADIR/commands.dat.
+
+	* src/m_privmsg.cc (msg_P): Modified to work with public command names rather
+	than internal names.
+
+	* src/network.cc (LoadConfig): Added call to Config::LoadCommands.
+
+	* src/network.cc (SaveData): Added call to Config::SaveCommands.
+
+2002-06-10  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* include/version.h: Bumped the patch level and marked this release as a
+	final release.
+
+	* src/c_moduser.cc (cmd_MODUSER): Fix typo
+
+	* src/c_operinfo.cc (cmd_OPERINFO): Fix typo
+
+	* ChangeLog: Minor formatting errors -- each line should fit an 80-character 
+	column.
+
+	* INSTALL: Wrote information on installing.
+
+	* README: Wrote general information.
+
+	* TODO: Removed some outdated items
+
+	* help/*: Completed all help files.
+
+	* src/c_moduser.cc (cmd_MODUSER: Added a parameter for turning on/off the
+	protect flag.
+
+	* src/c_operinfo.cc (cmd_OPERINFO): Added line to show whether or not a user
+	is protected, and bumped the suspend information to the same line.
+
+2002-05-28  Brian Cline  <clineb@cs.winthrop.edu>
+	
+	* include/access.h: Added missing include for sys/time.h. This fixes the only
+	compile error I saw on a FreeBSD 4.x compile.
+
+2002-04-26  Brian Cline  <clineb@cs.winthrop.edu>
+	
+	* help/TRAV: Removed help for TRAV command.
+
+	* include/cmdmap.h: Remove prototype for TRAV command.
+
+	* include/events.h: Remove event type for TRAV command.
+
+	* src/Makefile: Remove lines for trav.o.
+
+	* src/c_trav.cc: Removed the TRAV command -- this was only used for debugging
+	purposes and is no longer needed.
+
+	* src/cmdmap.cc (PrivMsgTab): Remove TRAV command.
+
+	* src/events.cc (commandEvents): Remove event for TRAV command.
+
+2002-04-25  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* include/stealth.h: Remove STEALTH_VERSION. Moved to version.h.
+
+	* include/version.h: Added to keep track of versions and patch levels.
+
+	* src/c_ctcp.cc (cmd_CTCP): Modified ctcp version reply to use new version
+	info from version.h.
+
+	* src/m_admin.cc (msg_AD): Modified /admin reply to use new version info from
+	version.h.
+
+	* src/m_version.cc (msg_V): Modified /version reply to use new version info 
+	from version.h.
+	
+	* include/stealth.h (STEALTH_VERSION): Modified release type to beta.
+
+2002-04-23  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* src/c_show.cc (cmd_SHOW): Changed instances of (*iter).first to 
+	iter->first.
+
+	* src/channel.cc (Channel::AddUser): Modified PROG_INFO debug message type to
+	PROG_ERR.
+
+	* src/config.cc (Config::SaveJupes): Modified PROG_INFO debug message type
+	to PROG_ERR.
+
+	* src/config.cc (Config::SaveClones): Modified PROG_INFO debug message type
+	to PROG_ERR.
+
+	* src/config.cc (Config::SaveChans): Modified PROG_INFO debug message type to
+	PROG_ERR.
+
+	* src/m_error.cc (msg_ERROR): Changed CHAN_INFO debug event to a PROG_ERR
+	event, since an error from the uplink is usually a critical error.
+
+	* src/m_leave.cc (msg_L): Changed the PROG_INFO debug event to a PROG_ERR
+	debug event, since not being able to locate a channel is a pretty important
+	problem.
+
+	* src/m_nick.cc (msg_N): Change instance of (*iter).first to iter->first.
+
+	* src/m_wallops.cc (msg_WA): Removed debug message that sent wallops to the
+	info channel. This *might* be re-enabled in the future with options set in
+	the configuration file.
+
+	* src/m_wallusers.cc (msg_WU): Removed debug message that sent wallusers to
+	the info channel. this might be re-enabled in the future with options set in
+	the configuration file.
+
+	* src/main.cc (main): Changed a critical error line that now uses Debug()
+	instead of std::cout.
+
+	* src/signals.cc (SignalHandler): Chaged PROG_INFO debug event to a PROG_ERR
+	debug event, since receiving an unhandled signal is probably pretty 
+	important.
+
+2002-04-22  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* include/jupe.h: Added a variable for a jupe's expire time, and modified
+	Jupe::GetExpireTS accordingly.
+
+	* src/c_adduser.cc (cmd_ADDUSER): Changed instances of (*iter).second to
+	iter->second.
+
+	* src/c_broadcast.cc (cmd_BROADCAST): Changed instances of (*iter).second to
+	iter->second.
+
+	* src/c_chanlist.cc (cmd_CHANLIST): Changed instances of (*iter).second to
+	iter->second.
+
+	* src/c_clearchan.cc (cmd_CLEARCHAN): Changed instances of (*iter).second to
+	iter->second.
+
+	* src/c_gline.cc (cmd_GLINE): Changed instances of (*iter).second to
+	iter->second.
+
+	* src/c_jupe.cc (cmd_JUPE): Changed instances of (*iter).second to
+	iter->second.
+
+	* src/c_map.cc (cmd_MAP): Changed instances of (*iter).second to
+	iter->second.
+
+	* src/c_opermsg.cc (cmd_OPERMSG): Changed instances of (*iter).second to
+	iter->second.
+
+	* src/c_scan.cc (cmd_SCAN): Changed instances of (*iter).second to
+	iter->second.
+
+	* src/c_servinfo.cc (cmd_SERVINFO): Changed instances of (*iter).second to
+	iter->second.
+
+	* src/c_show.cc (cmd_SHOW): Changed instances of (*iter).second to
+	iter->second. Also modified the format for SHOW JUPES, now showing the exact
+	expire date and time.
+
+	* src/c_trav.cc (cmd_TRAV): Changed instances of (*iter).second to
+	iter->second.
+
+	* src/c_unjupe.cc (cmd_UNJUPE): Changed instances of (*iter).second to
+	iter->second.
+
+	* src/client.cc: Changed instances of (*iter).second to iter->second.
+
+	* src/config.cc: Changed instances of (*iter).second to iter->second.
+
+	* src/config.cc (Config::LoadUsers): Simple formatting fix.
+
+	* src/config.cc (Config::LoadJupes): Modified the format of the jupes file,
+	and made the correct changes. The new format is described below.
+
+	* src/config.cc (Config::SaveUsers): Added code to output the regular 
+	comments to the user file that describes the exact format.
+
+	* src/config.cc (Config::SaveJupes): Output comments about format to the data
+	file. Also modified the format a bit, which is now as follows:
+		server_name expire_ts modify_ts active admin description
+	
+	* src/config.cc (Config::SaveClones): Output comments describing the format
+	of the file.
+
+	* src/config.cc (Config::SaveChans): Output comments describing the channel
+	data file format.
+
+	* src/gline.cc (Gline::FindNumHosts): Changed instances of (*iter).second to 
+	iter->second.
+
+	* src/jupe.cc: Modified the constructors to add a flag for the exact expire
+	timestamp.
+
+	* src/jupe.cc (Jupe::GetRemainingTime): Modified to instead call 
+	Jupe::GetExpireTS() and subtract the current timestamp to get the exact
+	number of seconds remaining on the jupe.
+
+	* src/m_join.cc (msg_J): Changed instances of (*iter).second to iter->second.
+
+	* src/m_jupe.cc (msg_JU): Remove the jupe variable since it really isn't
+	needed anywhere, and fix a bug where srvReason wasn't being assigned (added
+	a call to params.Assemble() to fix this).
+
+	* src/m_nick.cc (msg_N): Changed instances of (*iter).second to iter->second.
+
+	* src/main.cc (main): Move the call to fork() and writePid() lower, so that
+	we only fork and write the pid once we have loaded the configuration.
+
+2002-04-16  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* Makefile: Add *.pid and *.log to the 'make clean' file list.
+
+	* help/JUPE: Modified argument list to include <duration>.
+
+	* include/config.h: Added function SetFilename to set the configuration
+	file name. Added prototypes for DIE and RESTART commands.
+
+	* include/events.h: Add events for DIE and RESTART.
+
+	* include/jupe.h: Added an active flag (boolean) to each constructor. This
+	will always be required.
+
+	* include/network.h: Removed unneeded function ExpireGlines. Also added the 
+	active flag to each instance of AddJupe.
+
+	* include/stealth.h: Added prototype for ExpireJupes and a boolean value
+	called connecting, now used in Network::Main and main. Also added a boolean
+	value called dying, used with the DIE command, so that we can gracefully
+	die.
+
+	* src/Makefile: add c_die.o and c_restart.o to the file list and as targets.
+
+	* src/c_jupe.cc (cmd_JUPE): If a jupe is already found, check to see if it
+	is already active. If it is, return an error; if it is not, re-activate it.
+	Modified calls to AddJupe.
+
+	* src/c_login.cc (cmd_LOGIN): Fixed a bug that was setting a user's account
+	before we were checking to see if it had already been set before. This
+	prevented the AC info from getting out.
+
+	* src/c_show.cc (cmd_SHOW): Modified SHOW JUPES to show whether or not a
+	jupe is active.
+
+	* src/c_unjupe.cc (cmd_UNJUPE): No longer send an extra message when
+	removing/deactivating a jupe. We also check to make sure that the jupe
+	has not expired before sending out the message. If it has, simply remove
+	it from memory; otherwise, just deactivate it.
+
+	* src/cmdmap.cc (PrivMsgTab): Added lines for DIE and Restart.
+
+	* src/config.cc (~Config): Call clear() instead of empty() on the config
+	map -- empty() didn't do anything except return a boolean value.
+
+	* src/config.cc (LoadJupes): Modified call to AddJupe.
+
+	* src/events.cc: Added lines for DIE and RESTART.
+	
+	* src/jupe.cc: Modified all constructors to use the new 'active' flag.
+	Also moved GetRemainingTime() to here.
+
+	* src/m_jupe.cc (cmd_JUPE): Check to see if this jupe is inactive or active,
+	and pass on the necessary boolean flag to AddJupe.
+	
+	* src/main.cc (main): We now check to see whether we are trying to connect
+	to a server (with the boolean value 'connecting'). If so, and we have
+	already connected once, clear out the timers, everything in Net, and reload
+	the configuration. This is mainly used for the SIGHUP handler. We also do a
+	check to see if we're dying; if so, just break out of the main loop.
+
+	* src/network.cc (~Network): Added some calls to clear() to clear out all
+	data from our maps.
+
+	* src/network.cc (Main): Added a check to see if we are trying a connection
+	attempt, or if we are dying. If so, break out of the main loop and delete 
+	the socket.
+
+	* src/network.cc (Connect): Re-instantiate sock before we attempt a 
+	connection. Mostly used for 'restart' functionality.
+
+	* src/network.cc (AddJupe): Modified calls to jupe constructors. Also removed
+	some debug messages.
+
+	* src/network.cc (ExpireGlines): Removed.
+
+	* src/signals.cc (SigHangup): Since HUP initiates a restart, set the
+	connecting flag to true.
+
+	* src/stealth.cc (ExpireGlines): Moved code from Network::ExpireGlines to
+	this function...just makes more sense.
+
+	* src/stealth.cc (ExpireJupes): Added to run a check on all jupes to see if
+	any have expired. If so, remove them from memory.
+
+	* src/stealth.cc (RegisterTimers): Add a 5 second timer to check for expired
+	jupes.
+
+2002-04-15  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* Makefile: Added section for 'make debug', which simply runs the make
+	debug target in src/Makefile.
+
+	* include/channel.h: Added prototypes for ClearOps and ClearVoices, which
+	will deop or devoice all users on a channel, respectively.
+
+	* include/jupe.h: Completely revamped the Jupe class so that it no longer
+	inherits Server. Instead, due to u2.10.11's new built-in mechanism for
+	juping servers, we no longer need to treat jupes as actual servers.
+
+	* include/network.h: Rewrote the AddJupe prototypes to adjust to the new
+	changes in the Jupe class.
+
+	* include/stealth.h: Add a variable runningConfig to keep track of the
+	filename that we loaded our running configuration from. This is to help
+	things like signal handlers remember where we loaded the config from when
+	it deletes the current network data and creates a new instantiation of it.
+	When we create this new instantiation, we want to use the same set of
+	configuration data -- this is the easiest way to do it.
+
+	* src/c_jupe.cc (cmd_JUPE): Rewrote major portions of the JUPE command to
+	adjust to the changes made in the Jupe class. A parameter 'duration' is now
+	required.
+
+	* src/c_show.cc (cmd_SHOW): Modify the SHOW JUPES section according to new 
+	changes in the Jupe class.
+
+	* src/channel.cc: Made various changes throughout to use iter->second
+	instead of (*iter).second. They are one and the same.
+
+	* src/channel.cc (Channel::ClearOps): Added to clear the op flag from each
+	user on the channel in memory -- this method does not send out the mode
+	changes.
+
+	* src/channel.cc (Channel::ClearVoices): Added to clear the voice flag from
+	each user on the channel in memory. Just as with ClearOps, this does not
+	actually send out any mode changes to the uplink.
+
+	* src/cmdmap.cc (PrivMsgTab): Modify the syntax info and parameter count
+	for the JUPE command to show the duration parameter.
+
+	* src/config.cc (SaveJupes): Output parameter for the expire timestamp, and
+	remove the parameter for the integer numeric.
+
+	* src/jupe.cc: Modified everything to adjust to the new changes as mentioned
+	above in the JUPE class.
+
+	* src/m_burst.cc (msg_B): Change calls from DeopAll and DevoiceAll to 
+	ClearOps and ClearVoices.
+
+	* src/m_eoback.cc (msg_EA): Modified the call Jupe::RegisterWithBurst to
+	Jupe::Register.
+
+	* src/m_jupe.cc (cmd_JUPE): Modified for the changes in the Jupe class.
+
+	* src/main.cc (main): We now set the global variable runningConfig.
+
+	* src/network.cc (Network::AddJupe): Modified to adjust to new changes in the
+	Jupe class.
+
+	* src/network.cc (Network::FindJupeByName): We now use the jupe's actual
+	server name as the key, so return jupeMap[serverName] when seeking a server.
+
+	* src/network.cc (Network::RegisterJupesWithBurst): Remove this function,
+	it is no longer needed.
+
+	* src/signals.cc (RegisterSignals): Now use the SIGTERM and SIGINT handlers.
+
+	* src/signals.cc (SigHangup): Delete and re-instantiate the Net variable.
+
+	* src/stealth.cc: Add the declaration of runningConfig.
+
+2002-04-14  Brian Cline  <clineb@cs.winthrop.edu>
+	
+	* src/main.cc: Corrected missing/wrong include statements to fix compile
+	errors on FreeBSD.
+
+	* src/Makefile: Modified each .cc file's instructions to include a -o. Also
+	added a nifty target called 'debug' which will turn on the SOCKDEBUG and
+	DEBUG defines, as well as compile in full debugging symbols (-g3).
+
+	* src/network.cc: Added some headers to fix compile errors on FreeBSD.
+
+	* src/Makefile: Added instructions for each .cc file.
+
+	* src/m_burst.cc (msg_B): If we receive a BURST for a channel that already
+	exists in our channelMap, we need to make sure it is modified accordingly.
+	If the server's timestamp for the channel is younger than ours, we deop and
+	devoice all users on it, and clear all modes -- then we modify our copy of
+	the channel timestamp and set the "real" modes on it.
+
+	* src/c_clone.cc (cmd_CLONE): We no longer need to hack at the numeric 
+	returned by GetNextNumeric, since it works properly now.
+
+	* src/m_eoback.cc (msg_EA): Remove old code that sent jupes after the uplink
+	sent its EOB acknowledgement. We already do it from Network::Register.
+
+	* src/network.cc (Network::GetNextNumeric): Now returns the CORRECT server
+	numeric. This should fix the problem encountered with loading clones at 
+	startup.
+
+2002-04-12  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* src/client.cc (SetAccount): When setting account information, we should
+	set the +r USER_ACCOUNT flag. This way, if the user logs out and then logs
+	back in, we know not to send out a second AC token -- the uplink will send
+	us a nasty protocol violation DS message.
+
+	* src/m_nick.cc (msg_N): Optimized a little bit of code so that we dont try
+	searching for a client after we've used Network::AddClient to add it.
+	Instead, we can just use the return value. Also added a safeguard in the
+	clone checking code so that Stealth won't core if it *somehow* finds a
+	client in the map whose map key exists but where the client data is null.
+
+	* src/m_quit.cc (msg_Q): Changed an assert to a general if statement that
+	outputs a debug/error message if we receive a quit message for a client that
+	does not exist in the map. Also removed an unnecessary bit of code to make
+	sure that the client is removed. We can generally trust the STL map container
+	to remove it if it does exist.
+
+	* network.cc: Made some general code cleanups and optimizations, converting 
+	statements like "(*iterator).second" to "iterator->second" since it generally
+	has the same effect in the cases where it was being used like that. Also, in
+	cases where	we are removing elements in maps after searching for them, we use
+	the iterator when we call erase() instead of a string so that it doesn't have
+	to spend the extra time hashing or searching for the key.
+
+	* network.cc (AddClient): Added a check to see if a numeric nick collision
+	occured while trying to insert the new client. Also fixed a tab issue on the 
+	line where we actually perform the insertion.
+
+	* network.cc (FindServerByNum): Completely rewritten to be a bit more 
+	efficient. The map container provides us with a find function, so there's no 
+	need to reinvent the wheel.
+
+	* network.cc (FindClientByNum): Rewritten for the same reason -- we can use 
+	map::find() here as well.
+
+	* stealth.cc (Report): We now double-check to make sure we have the right
+	type of source (server or client), based on the length of the numeric that
+	was passed to the function. If neither condition fits, use whatever type is 
+	specified in the serverEvents map.
+
+2002-04-11  Brian Cline  <clineb@cs.winthrop.edu>
+	
+	* include/events.h: Removed SRV_MSG, SRV_NOTICE, and SRV_PASS. We will never
+	need these to be recorded events.
+
+	* include/network.h: Added prototype for FinishedBurst().
+
+	* src/events.cc: Removed a few unnecessary event lines and modified the
+	format and report value of some others to keep from getting TOO much info.
+
+	* src/network.cc (FinishedBurst): Added to return true if our uplinked has
+	acknowledged our end of burst message, and false if it has not.
+
+	* src/stealth.cc (Debug): Only send to the info chan if our uplink has sent
+	its EA token.
+
+	* src/stealth.cc (Report): Only send to the info chan if our uplink has sent
+	its EA token. Also shorten the source user/server to NICKLEN characters if
+	it is over NICKLEN characters. And if we cannot locate a user OR a server
+	matching the numeric passed, just use the numeric instead.
+
+	* src/c_adduser.cc (cmd_ADDUSER): Added Report line.
+
+	* src/c_ban.cc (cmd_BAN): Added report line.
+
+	* src/c_broadcast.cc (cmd_BROADCAST): Added report line.
+
+	* src/c_chaninfo.cc (cmd_CHANINFO): Added report line.
+
+	* src/c_chanlist.cc (cmd_CHANLIST): Added report line.
+
+	* src/c_clearchan.cc (cmd_CLEARCHAN): Added report line.
+
+	* src/c_clone.cc (cmd_CLONE): Added report line.
+
+	* src/c_cloneact.cc (cmd_CLONEACT): Added report line.
+
+	* src/c_clonejoin.cc (cmd_CLONEJOIN): Added report line.
+
+	* src/c_clonepart.cc (cmd_CLONEPART): Added report line.
+
+	* src/c_clonequit.cc (cmd_CLONEQUIT): Added report line.
+
+	* src/c_clonesay.cc (cmd_CLONESAY): Added report line.
+
+	* src/c_ctcp.cc (cmd_CTCP_PING): Added report line.
+
+	* src/c_ctcp.cc (cmd_CTCP_VERSION): Added report line.
+
+	* src/c_ctcp.cc (cmd_CTCP_GENDER): Added report line.
+
+	* src/c_deop.cc (cmd_DEOP): Added report line.
+
+	* src/c_deopall.cc (cmd_DEOPALL): Added report line.
+
+	* src/c_devoice.cc (cmd_DEVOICE): Added report line.
+
+	* src/c_devoiceall.cc (cmd_DEVOICEALL): Added report line.
+
+	* src/c_disable.cc (cmd_DISABLE): Added report line.
+
+	* src/c_enable.cc (cmd_ENABLE): Added report line.
+
+	* src/c_gline.cc (cmd_GLINE): Added report line.
+
+	* src/c_help.cc (cmd_HELP): Added report line.
+
+	* src/c_invite.cc (cmd_INVITE): Added report line.
+
+	* src/c_jupe.cc (cmd_JUPE): Added report line.
+
+	* src/c_kick.cc (cmd_KICK): Added report line.
+
+	* src/c_login.cc (cmd_LOGIN): Added report line.
+
+	* src/c_logout.cc (cmd_LOGOUT): Added report line.
+
+	* src/c_mode.cc (cmd_MODE): Added report line.
+
+	* src/c_moduser.cc (cmd_MODUSER): Added report line.
+
+	* src/c_op.cc (cmd_OP): Added report line.
+
+	* src/c_opall.cc (cmd_OPALL): Added report line.
+
+	* src/c_operinfo.cc (cmd_OPERINFO): Added report line.
+
+	* src/c_opermsg.cc (cmd_OPERMSG): Added report line.
+
+	* src/c_quote.cc (cmd_QUOTE): Added report line.
+
+	* src/c_refreshg.cc (cmd_REFRESHG): Added report line.
+
+	* src/c_remgline.cc (cmd_REMGLINE): Added report line.
+
+	* src/c_remuser.cc (cmd_REMUSER): Added report line.
+
+	* src/c_reop.cc (cmd_REOP): Added report line.
+
+	* src/c_scan.cc (cmd_SCAN): Added report line.
+
+	* src/c_servinfo.cc (cmd_SERVINFO): Added report line.
+
+	* src/c_set.cc (cmd_SET): Added report line.
+
+	* src/c_settime.cc (cmd_SETTIME): Added report line.
+
+	* src/c_show.cc (cmd_SHOW): Added report line.
+
+	* src/c_showcommands.cc (cmd_SHOWCOMMANDS): Added report line.
+
+	* src/c_translate.cc (cmd_TRANSLATE): Added report line.
+
+	* src/c_trav.cc (cmd_TRAV): Added report line.
+
+	* src/c_unban.cc (cmd_UNBAN): Added report line.
+
+	* src/c_unjupe.cc (cmd_UNJUPE): Added report line.
+
+	* src/c_uptime.cc (cmd_UPTIME): Added report line.
+
+	* src/c_voice.cc (cmd_VOICE): Added report line.
+
+	* src/c_voiceall.cc (cmd_VOICEALL): Added report line.
+
+	* src/c_whois.cc (cmd_WHOIS): Added report line.
+
+	* src/c_whoison.cc (cmd_WHOISON): Added report line.
+
+	* src/c_write.cc (cmd_WRITE): Added report line.
+
+	* src/m_account.cc (msg_AC): Added report line.
+
+	* src/m_way.cc (msg_A): Added report code.
+
+	* src/m_burst.cc (msg_B): Added report line.
+
+	* src/m_clearmode.cc (msg_CM): Added report line.
+
+	* src/m_create.cc (msg_C): Added report line.
+
+	* src/m_destruct.cc (msg_DE): Added report line.
+
+	* src/m_desynch.cc (msg_DS): Added report line.
+
+	* src/m_eob.cc (msg_EB): Added report line.
+
+	* src/m_eoback.cc (msg_EA): Added report line.
+
+	* src/m_error.cc (msg_ERROR): Added report line.
+
+	* src/m_gline.cc (msg_GL): Added report line.
+
+	* src/m_invite.cc (msg_I): Added report line.
+
+	* src/m_join.cc (msg_J): Added report line.
+
+	* src/m_jupe.cc (msg_JU): Added report line.
+
+	* src/m_kick.cc (msg_K): Added report line.
+
+	* src/m_kill.cc (msg_D): Added report line.
+
+	* src/m_leave.cc (msg_L): Added report line.
+
+	* src/m_mode.cc (msg_M): Added report line.
+
+	* src/m_nick.cc (msg_N): Added report line.
+
+	* src/m_ping.cc (msg_G): Added report line.
+
+	* src/m_quit.cc (msg_Q): Added report line.
+
+	* src/m_server.cc (msg_S): Added report line.
+
+	* src/m_silence.cc (msg_U): Added report line.
+
+	* src/m_squit.cc (msg_SQ): Added report line.
+
+	* src/m_stats.cc (msg_R): Added report line.
+
+	* src/m_topic.cc (msg_T): Added report line.
+
+	* src/m_version.cc (msg_V): Added report line.
+
+	* src/m_wallops.cc (msg_WA): Added report line.
+
+	* src/m_wallusers.cc (msg_WU): Added report line.
+
+	* src/m_whois.cc (msg_W): Added report line.
+
+2002-04-10  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* c_show.cc (cmd_SHOW): Added STATS parameter to show usage statistics for
+	each map in the Network class.
+
+2002-04-09  Brian Cline  <clineb@cs.winthrop.edu>
+	
+	* Makefile: Put the cd & make directly under 'all' so that make will actually
+	check for changes.
+
+	* include/events.h: Declared all necessary types for stuff that will use
+	event reporting.
+
+	* include/stealth.h: Added prototypes for Report(), added a NICKLEN define,
+	and modified the URL for stealth.
+
+	* src/Makefile: Added events.o.
+
+	* src/c_map.cc (cmd_MAP): Add call to Report() to pass along information to
+	the infochan.
+
+	* src/events.cc: Defined all necessary types for the event reporting code.
+
+	* src/m_admin.cc (msg_AD): Add call to Report() to pass along information to
+	the infochan.
+
+	* src/stealth.cc (Report): Added two instances of Report -- the first to
+	report info on major server->server messages and the second to report 
+	information on commands to the info chan.
+
+	* src/msgmap.cc: Added comments after each element in the message map
+	describing the type of message it is for.
+
+	* src/socket.cc (Recv): Remove cout statement if SOCKDEBUG is defined. No
+	need to output to stdout if we're forking anyway.
+
+	* src/socket.cc (Send): Remove cout statement if SOCKDEBUG is defined.
+
+	* include/stealth.h: Added prototype for writePid.
+
+	* src/config.cc (LoadUsers): Will no longer load a user twice if they exist
+	in the file twice. Removed some old debugging stuff.
+
+	* src/config.cc (SaveChans): Added code for SaveChans...still needs to be
+	tested.
+
+	* src/main.cc (main): Added a call to fork() and writePid() so that Stealth
+	will now fork into the background and write out its process ID to a file.
+
+	* src/network.cc (LoadConfig): We now call RegisterSelf() from within
+	LoadConfig now after loading the master configuration, so that when 
+	LoadClones actually loads and adds users to the clientMap, it will have 
+	already added the master bot to the map. Therefore we will have an accurate 
+	next numeric.
+
+	* src/socket.cc (Send): change DEBUG macro to SOCKDEBUG, so we can still
+	compile stealth with DEBUG but without getting socket data sent to stdout.
+
+	* src/socket.cc (Recv): change DEBUG to SOCKDEBUG, just as above.
+
+	* src/stealth.cc (writePid): Added to write the forked process's process ID
+	to a file. It will write to bin.pid, where 'bin' is the name of the Stealth
+	binary.
+
+2002-04-06  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* m_topic.cc (msg_TOPIC): Modified to find the topic message relative to
+	where the ':' is found as the first character of a parameter. This is so that
+	if someone links stealth to u2.10.12 (alpha) and has TOPIC_BURST turned on,
+	we don't mess up with the extra timestamp specified in the 3rd parameter.
+
+2002-04-03  Brian Cline  <clineb@cs.winthrop.edu>
+	
+	* m_create.cc (msg_CREATE): Removed some old debugging stuff that is 
+	apparently no longer needed.
+
+	* c_show.cc (cmd_SHOW): SHOW USERLIST now sorts the userlist in descending
+	level order.
+
+2002-04-02  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* c_show.cc (cmd_SHOW): Added code to show disabled commands when "DISABLED"
+	is given as the argument to the SHOW command. Also added a case to notify
+	the user if the argument they provided was not recognized.
+
+	* c_clearchan.cc (cmd_CLEARCHAN): Modified to accept a 'g' flag, which will
+	gline all users in a channel *except* for the oper who issued the command as
+	well as any opers who are logged in and whose protected flag is set in their
+	access record.
+
+	* c_gline.cc (cmd_GLINE): Safeguard against opers who might try to use
+	nick!user@host masks or masks that don't even include a '@' character.
+
+	* client.cc (IsProtected): Added to return whether or not a user is
+	protected based on their access record. If they are not logged in, return
+	false.
+
+	* client.h: Added prototype for IsProtected.
+
+2002-03-26  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* Makefile: Fixed up some excessive and strange tabbing in the .o file list.
+	
+2002-03-26  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* m_create.cc (msg_C): Fixed the debugging stuff to clear the realName 
+	variable after each iteration so that we don't end up with a cumulative 
+	string of character codes when we are parsing multiple channels.
+
+2002-03-26  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* .cvsignore: Added an ignore for sundry log files.
+
+	* config.cc: Modified all Load and Save functions to use bool types as their
+	return value.
+
+	* config.cc (LoadExceptions): Added for future expansion to load hosts that
+	are exempted from host/clone checking.
+
+	* config.cc (SaveUsers): Fixed invalid syntax when writing user file. Just
+	forgot to include the IsProtected flag.
+
+	* config.cc (SaveJupes): Wrote the code to save all jupes.
+
+	* config.cc (SaveClones): Wrote the code to save all clones. This function
+	still needs to be tested.
+
+	* config.h: Modified all Load and Save functions to use bool as their return
+	type. Also added the LoadExceptions and SaveExceptions prototypes.
+
+	* jupe.h: Added a GetStartTS member function to return the timestamp for the
+	jupe's start time.
+
+	* network.cc (ParseServMsg): Removed line that outputted a copy of all data
+	received.
+
+	* socket.cc (Send): Added call to new AppendLog to append all sent data to
+	the socket.log file. Also fixed the prototype for Send so that it actually
+	makes sense, i.e., "const char*" as opposed to "char const*". There is no
+	real difference, but it does make more sense this way.
+
+	* socket.cc (Recv): Modified to allow strange and non-printable characters.
+	Whenever a client joined a channel where the channel name included a
+	non-printable character, the channel name may have been mistaken for an 
+	already existing channel. For example, "#chan\046" could have been mistaken 
+	for "#chan". Therefore stealth would have thought that a client was on a 
+	channel that it really was not; also, if the client joined both "#chan" and 
+	"#chan\046", and it parted both of them, stealth would segfault since it 
+	could not locate "#chan" after removing it the first time. This should fix
+	the problem. Now, the only characters that are disallowed in the buffer
+	are '\0', '\n', and '\r'. Also added a cout and a call to AppendLog whenever
+	data is received and DEBUG is #define'd.
+
+	* socket.h: Fixed prototype for Send and Sendf to make a little more sense.
+
+	* stealth.cc (Debug): Added calls to AppendLog to append the log info to the
+	appropriate log file. Also defined the AppendLog function, which simply
+	appends a line to a log file with the full date preceding each line.
+
+	* stealth.h: Modified version number to 1.0, since we are extremely close to
+	a stable release; but its still in the alpha stage and there are small bits
+	and pieces of missing code yet to be completed. Also added the prototypes for
+	AppendLog (one that includes a format argument as char* and the other as
+	const char*).
+
+2002-03-21  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* m_create.cc (msg_C): Added some stuff for debugging purposes -- whenever
+	a channel is created, we output the numeric values of each character in the
+	channel's name. This is to help figure out why stealth cored when a user left
+	a channel whose name included certain non-printable characters. It looks as
+	if the channel was never even created, because in msg_L *chan turned up null
+	after the call to FindChannelByName. This new debugging code is to help
+	figure out exactly which non-printing characters cause this problem with
+	std::map.
+
+	* m_leave.cc (msg_L): Added a safeguard to protect against segfaults if a
+	client parts a channel that stealth somehow doesn't know about -- basically,
+	in the same situation described above. If the channel is not found, we output
+	a debug message instead of just ignoring it.
+
+2002-03-20  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* c_show.cc (cmd_SHOW): Squashed a few bugs in the SHOW CLONES and SHOW LOAD
+	code. When calculating network and server load, any servers with clients that
+	are set +k (as services) are excluded.
+
+	* signals.cc (RegisterSignals): Temporarily disabled handling for SIGTERM and
+	SIGKILL until a DIE/SHUTDOWN command is added. Plus, it makes it hard to test
+	stuff when you can't hit ctrl-c to stop it after discovering a bug.
+
+2002-03-19  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* c_show.cc (cmd_SHOW): Made the iterator names a little shorter for sake of
+	line length in for() statements. Also added the "CLONES" and "LOAD" options
+	to this command. "SHOW CLONES" shows hostnames that have two or more client
+	connections. "SHOW LOAD" shows the load of each server, its network load,
+	and the network's load statistics.
+
+2002-03-17  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* access.cc (Access): Added initialization calls for the new protect value.
+	Modified constructors to use bool values for suspend and protect values, 
+	rather than ints.
+
+	* access.cc (IsProtected): Added to return whether or not this user has their
+	protected flag set on.
+
+	* access.cc (SetProtect): Added to set the user's protect flag.
+
+	* access.cc (SetSuspend): Modified to use booleans instead of integers.
+
+	* access.h: Added the protected flag as a boolean value and modifed the
+	suspend flag to use a bool instead of an integer. Also modified the 
+	prototypes for each of the modified constructors and IsSuspended, and added
+	the prototype for IsProtected.
+
+	* c_adduser.cc (cmd_ADDUSER): Modified the call to AddAccessEntry to include
+	a value for the user's protect flag, and use a boolean value for the suspend
+	flag (both are initially set to false).
+
+	* config.cc (LoadUsers): Modified to load the protect value from the
+	users.dat file, which is now the 3rd field of each line.
+
+	* network.cc (AddAccessEntry): Modified to pass along the new bool values to 
+	the Access constructor.
+
+	* network.h: Modified the AddAccessEntry constructor with the new protect 
+	flag.
+
+	* dbfiles/users.dat: Added in the protect value to the sample, initially set
+	to 1 (true).
+
+2002-03-17  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* main.cc: Fixed broken include -- signal.h should be signals.h.
+
+2002-03-14  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* Makefile: corrected typo and made signal.o to signals.o.
+
+	* signals.cc: Fixed broken include -- signal.h should have been signals.h. I 
+	had previously named signals.* as signal.*, but changed it -- there is less 
+	confusion involved when also using the system signal.h.
+
+	* signals.cc (SigHangup): Fixed compile warning for unused variable. Be 
+	advised that the SIGHUP handler does not yet work -- the Network class 
+	doesn't offer sufficient public procedures to take care of fully restarting 
+	stealth from the hangup handler. So be forewarned that this simply only 
+	causes stealth to squit, but not reconnect. This issue will be taken care of 
+	in the near future.
+
+2002-03-14  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* Makefile: Added signal.o to the file list.
+
+	* c_moduser.cc (cmd_MODUSER): Modified to allow users to add/delete hostmasks
+	and change their password.
+
+	* main.cc (main): Added include for signals.h and added a call to register
+	the most important signals with their appropriate handlers.
+
+	* signals.cc: Added the RegisterSignals function and several handler 
+	functions.
+
+	* signals.h: Added prototypes for each function in signals.cc.
+
+2002-03-13  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* network.cc (Main): Implemented a select()-centered solution for working
+	with timers. Now, we determine the next soonest run time of a timer in the
+	timer vector. We stick that in a timeval struct and pass it along to select()
+	as the timeout value, so that if the uplink is idle for a while, select()
+	will still return just in time to call the timer(s) that need to be called.
+	This completely fixes the CPU-intensive bug. Now for credit...a portion of
+	this new select() and file descriptor code, as well as the general idea 
+	(which isn't exactly uncommon), was found in GNUWorld. So thanks goes to the
+	GNUWorld folks.
+
+	* socket.cc (GetFD): Added this function to return the file descriptor number
+	so that the select() code in Network::Main() can use it.
+
+	* socket.h: Added prototype for GetFD.
+
+2002-03-13  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* network.cc (Main): Modified buffer length to a more sane value, only 1.0K
+	as opposed to the previous 8.0K. Also disabled timer checking for the moment
+	since it is causing stealth to use full CPU to do so, and that's really not
+	good.
+
+	* socket.cc (Connect): Reverted socket to blocking by default by commenting
+	out the line that sets the nonblock flag -- this is so we can temporarily
+	revert to the way the socket worked before, until the CPU usage issue is
+	fixed. Also in several overloaded copies of Connect, modified the hostname
+	buffer to a more sane value (512 bytes instead of 2.0KB).
+
+2002-03-13  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* access.cc (IsValidHost): Defined code for IsValidHost, which simply goes
+	through the list of hosts and check if the host passed to this function
+	matches any of the hosts in the list. Changed this to a bool since it really
+	makes more sense.
+
+	* access.h: Modified prototype for IsValidHost to be a bool statement.
+
+	* c_set.cc (cmd_SET): Defined code for the SET command, which will simply
+	insert a new parameter and value or overwrite an existing parameter with a
+	value.
+
+	* config.cc (SetParam): Added this function so that the Network class has
+	something to call from Network::SetParameter. This function simply sets a
+	parameter in the options/configuration map to a value.
+
+	* config.h: Added prototype for SetParam.
+
+	* m_nick.cc (msg_N): The clone checking code will no longer gline hosts that
+	match the hostmasks of any opers in the access map. It does, however, issue
+	a warning in WALLOPS that clones are connecting that match an oper's access
+	record. ("Detected n clones from hostname (not glining oper OperNick)").
+	Also modified so that it will never g-line service bots (have +k usermode
+	on).
+
+	* main.cc (main): Added call to RegisterTimers, which is now a global 
+	function since gcc didn't like the previous scheme.
+
+	* network.cc (RegisterTimers): Removed and moved to the global namespace in
+	stealth.cc.
+
+	* network.cc (SetParameter): Added to call Config::SetParam, primarily for
+	the SET command.
+
+	* network.cc (Main): Modified to only parse server messages when they come in
+	(the other very crucial half of this modification is in Socket::Connect).
+	Also modified the timer loop to use an integer instead of an iterator, which
+	doesn't make much of a difference; it was just done in the midst of
+	debugging. It still works exactly the same. Also fixed a small typo (bug)
+	that was removing glines that haven't expired yet (was using '>=' when 
+	comparing a gline's expire time against the current time, instead of '<=').
+
+	* network.h: Moved the typedef for TimerVectorType, the prototype for
+	RegisterTimers, and the timerVector itself to stealth.h into the global 
+	namespace. Also added the prototype for the new SetParameter function.
+
+	* socket.cc (Create): Insert some spacing to improve readability. Also, this
+	is where the other very crucial half of the timer modification takes place.
+	Normally, read() waits for data to come in before returning anything.
+	Therefore, in order to make Network::Main really work and check timers
+	accordingly, we need to set the non-blocking flag on the socket so that it
+	will not wait for a response before returning. This way, if the connection
+	goes idle for an extended amount of time (Heaven forbid), we can still check
+	timers without having to worry about read().
+
+	* stealth.cc: Moved the definition of the timerVector here and included
+	vector for that purpose. Moved the RegisterTimers function from Network to
+	this file, in the global namespace. GCC didn't seem to like one class trying
+	to use a function pointer of a function in that instantiation's parent class.
+	Also added the ExpireGlines and SaveData functions, which are simply aliases
+	to their counterparts in the Network class. This, again, is to avoid some 
+	issues with GCC and messy--moreover, unknown--syntax.
+
+	* stealth.h: Moved the typedef for TimerVectorType here, added the prototypes
+	for RegisterTimers, ExpireGlines, SaveData, and added an extern declaration
+	for timerVector.
+	
+	* timer.cc (Timer): Modified constructors to revert back to the global 
+	namespace for the handlerFunction.
+
+	* timer.cc (Run): Un-commented the call to the timer handler function.
+
+	* timer.h: Modified constructor prototypes to revert to the global namespace 
+	as their scope, and did the same for the private member t_handler (the 
+	pointer to the handler function itself).
+
+2002-03-12  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* c_disable.cc (cmd_DISABLE): Added the code for the DISABLE command. This
+	simply modifies the CmdEnabled flag of a PrivMsgTabItem instance. The only
+	two commands that cannot be disabled are DISABLE and ENABLE, because that
+	could create an interesting and inescapable paradox until stealth is 
+	restarted.
+
+	* c_enable.cc (cmd_ENABLE): Added code for ENABLE command.
+
+	* c_showcommands.cc (cmd_SHOWCOMMANDS): Modified to exclude commands that are
+	disabled. Also removed an extra redundant include for cmdmap.h.
+
+	* cmdmap.cc: Modified the private message table to initially set every 
+	command's enabled flag to on (1). Also removed an extra parameter from the
+	syntax string for CHANLIST.
+
+	* cmdmap.h: Added CmdEnabled flag to the PrivMsgTabItem struct.
+
+	* m_privmsg.cc (msg_P): Modified to disallow users from using commands that
+	are not enabled. Also moved the "Not enough access" check below the block
+	that returns syntax where necessary -- it's kind of weird to have it deny
+	you access from seeing proper syntax, when help will show you anyway.
+
+2002-03-12  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* c_gline.cc (cmd_GLINE): Removed some old redundant code since the Gline 
+	class performs most of the internal stuff, like figuring out expire dates,
+	the number of affected hosts, sending the gline, etc.
+
+	* config.cc (LoadClones): Trying to figure out what's up with the clone 
+	loading function.
+
+	* gline.cc (Gline): Removed constructor that included argument for numHosts,
+	since the Gline class now determines in FindNumHosts the count for the
+	number of affected users. Also added a call to FindNumHosts in each
+	constructor.
+
+	* gline.cc (FindNumHosts): Added to determine exactly how many hosts this
+	gline affects. This was previously undetermined for all cases where a gline
+	was sent, with the exception of the GLINE command itself. This should fix
+	that inconsistency.
+
+	* gline.h: Removed constructor that included the argument for numHosts, and
+	added a prototype for the new FindNumHosts.
+
+	* network.cc (RegisterTimers): Commented out the lines that insert stuff into
+	the timerVector, since this isn't quite working yet.
+
+	* network.cc (AddGline): Removed overloaded copy of Network::AddGline that
+	included the argument for the number of affected hosts.
+
+	* network.h: Removed the prototype for the old overloaded AddGline.
+
+	* timer.cc: Removed extra (unnecessary) reference operators in the 
+	constructors, and commented out the line that runs the actual handler since
+	we don't quite have this working yet.
+
+2002-03-12  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* network.cc (RegisterTimers): Modified pointer to ExpireGlines and SaveData
+	to be passed to the Timer constructor. Basically trying to get this working.
+	This is as close as I've gotten -- but gcc stops after warning me about it
+	adding implied references to these functions...with no other errors. Not a
+	very detailed description of the problem. This still does not compile yet, so
+	I do not recommend cvs up'ing yet.
+
+	* timer.h: Modified handler function and all references to it to be from the
+	Network class, since we're doing network events with it. Just to get it 
+	working, timer handler functions may go in their own separate namespace 
+	later.
+
+2002-03-12  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* config.cc: Added SaveJupes, SaveClones, and SaveChans definitions so that
+	the compiler wouldn't complain. These will be added soon.
+
+	* network.cc (RegisterTimers): Added to register ExpireGlines every 20
+	seconds and SaveData every 600 seconds.
+
+	* network.cc: Removed ambiguous SaveAllData since we already have SaveData,
+	and changed SaveData to a void since we wont really need to return anything
+	from it...we're calling four functions, for crying out loud.
+
+	* network.h: Made appropriate modifications to prototypes for SaveData, 
+	removed SaveAllData, and added prorotype for RegisterTimers.
+
+	* timer.cc: Added reference operator to the two constructors that actually do
+	something with a handler passed to it.
+
+	* timer.h: Fix RCS tag.
+
+2002-03-12  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* timer.cc: Modified various things in order to get this compiling the way we
+	want it. Sort of forgot how to do function pointers, but this should be the 
+	correct way now. We also won't need the handler to be an int, because we
+	really dont need to do anything with the return value in Network::Main once
+	it does return.
+
+	* timer.h: Modified prototypes according to sundry changes in timer.cc.
+
+2002-03-12  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* Makefile: Added timer.o to the list.
+
+	* channel.cc: Converted all instances of map< ..., ChannelClient, ...> to
+	ChanClientMapType, which is now defined in channel.h. Also shortened some
+	really long, hideous lines.
+
+	* channel.h: Defined ChanClientMapType as the type of map that we store
+	channel clients in, and made the necessary conversion to the private member
+	c_users.
+
+	* main.cc (main): Modified name of ParseLoop to Main().
+
+	* network.cc (ParseLoop): Modified name of this function to Network::Main().
+
+	* network.cc (Main): Added code to check for and run relevant timers that
+	need to be run. So far this is completely untested and has not even been
+	*fully* compiled.
+
+	* network.cc (ExpireGlines): Added to check for any expired g-lines and
+	remove them from the glineMap in memory. Note that this does not send out a
+	message to all servers asking them to remove it, because ircu does it
+	automatically. This will be used in a timer, implemented in a later commit.
+
+	* network.cc (SaveAllData): Added to save all critical data. This will most
+	likely be used in a timer in the future.
+
+	* network.h: Defined TimerVectorType as a vector<Timer*>, modified name of
+	ParseLoop to Main since we do more than parsing in this function now, added
+	the prototypes for ExpireGlines and SaveAllData, and also added the private
+	member timerVector to store timers.
+
+	* timer.cc: Added file - defines all of the functions in the Timer class.
+
+	* timer.h: Added file - declares the Timer class and all of its members.
+
+2002-03-11  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* c_scan.cc (cmd_SCAN): Modified SCAN to also check for ident, in case one 
+	should ever want to search for clients with no ident (*~*@*).
+
+2002-03-09  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* c_clonequit.cc (cmd_CLONEQUIT): Added a call to remove the clone from the
+	clientMap.
+
+	* config.cc (LoadConfiguration): Convert old code to use IsComment().
+
+	* config.cc (LoadClones): Convert old code to use IsComment(). Added a debug 
+	message to try and track down why clones aren't being loaded from the 
+	clones.dat file.
+
+	* config.cc (LoadChans): Convert old code to use IsComment().
+
+	* stealth.conf: Modified TS to be something a bit closer to the birth of 
+	Stealth. :)
+
+2002-03-06  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* m_nick.cc (msg_N): Add in a safeguard so that if maxCloens is 0, then we
+	don't even touch the clone checking code. This protects against 
+	configurations that don't even have this value in the file, and also protects
+	against REALLY sadistic services admins. Fixed the line that compares the ip
+	and "AAAAAA" (0.0.0.0, most service clients' ip). Should work now. Finally,
+	removed a no longer needed debug message.
+
+	* c_whois.cc (cmd_WHOIS): Modified call to GetModes to GetModeString.
+
+	* channel.cc (GetNumericsString): Added this function to return a string of 
+	numerics and their modes on the channel in standard BURST style, i.e.:
+		ABAAA:o,ABAAB:v,ABAAB,ABAAC:ov
+	This is mostly just for the new way that we send our own burst to the uplink.
+	
+	* channel.h: Added prototype for new GetNumericsString member function.
+
+	* client.cc (GetModes): Modified name to GetModeString.
+
+	* client.h: Modified name of GetModes function to GetModeString. Also added
+	two new member functions: GetConnectTS to return the client's connect
+	timestamp in time_t format; GetModes to return the actual unsigned int value
+	that stores the channel modes.
+
+	* config.cc (Config): Removed old commented-out pieces of code that were
+	calling several of the loader functions.
+
+	* config.cc (IsComment): Added this function to return whether or not the
+	line passed to it is a comment -- if it begins with '#', ';', or '//'.
+
+	* config.cc (LoadUsers): Modified comment checking to call new IsComment
+	function.
+
+	* config.cc (LoadClones): Wrote code for LoadClones function. Unlike jupes
+	and access records, clones are not created in a new map inside of Network.
+	Rather, they are treated as normal clients on this server. This really makes
+	it easier to send a proper burst with the revamped Network::Register code.
+
+	* config.cc (LoadChans): Wrote code for LoadChans function. This simply
+	inserts each channel in this file into the channel map as a new channel. If
+	the channel already exists, we simply set the specified modes on it and add
+	the bot as an op to the channel.
+
+	* config.h: Added prototype for IsComment function.
+
+	* m_nick.cc (msg_NICK): Added support for clone checking. If a new user has
+	at least CLONEGLINE clones on the network, they are glined. Otherwise, if
+	they have at least CLONEWARN clones on the network, a wallop is sent with
+	their IP and the number of clones they have loaded.
+
+	* main.cc (main): Modified the order in which Register and RegisterSelf are
+	called, since we want to insert all of our own data into the map and then
+	send that data to the live network. This call to RegisterSelf could logically
+	go before we even try to connect; but if we end up not being able to connect,
+	why waste the memory?
+
+	* network.cc (Register): Totally revamped the way our initial burst is sent.
+	We now send it straight from the data in our map. All clients and channels
+	that are pre-loaded from the db files are sent like this. This makes it a lot
+	more efficient and easier to deal with -- this is how it should have been
+	done to begin with.
+
+	* stealth.conf: Added configuration values CLONEWARN, CLONEGLINE, and 
+	CLONETIME for the new clone checking code.
+
+2002-03-04  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* c_map.cc (GetLinks): Fixed a bug that was causing the MAP command to go
+	absolutely crazy when generating the map. This only occured with servers that
+	had similar numerics that were differently only in their case, such as 'Vs'
+	and 'VS' -- if one of them was stealth's server, map generation would enter
+	an endless loop because it thought that the other one was stealth, and so 
+	kept generating the map over and over and over for its uplink. The problem 
+	was that we weren't using a case-sensitive string comparison when figuring 
+	out if a server is uplinked to the server we're generating the subtree for. 
+	However, this works fine now.
+
+	* m_server.cc (msg_SERVER): Fixed an out-of-bounds error when trying to
+	determing if a server is a hub and where the server description starts.
+	This specifically happened when the uplink did not send a +h flag and when
+	it had only one word in its description. Much thanks to Tom Rons for 
+	exposing this critical bug.
+
+2002-03-03  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* c_chanlist.cc (cmd_CHANLIST): Modified to match the mask against "chan"
+	instead of "#chan", since every channel that services see is global. Makes
+	things a bit easier.
+
+	* ChangeLog: Consolidated all of today's commits into a single list of
+	changes.
+
+	* c_chanlist.cc (cmd_CHANLIST): Modified to only show channel names that
+	match the specified search mask.
+
+	* cmdmap.cc: Modified CMDMAP line with new syntax and required argument
+	count.
+
+	* .cvsignore: Added vnet directory.
+
+	* c_showcommands.cc (cmd_SHOWCOMMANDS): Removed old include for maps.h and
+	added include for cmdmap.cc.
+
+	* Makefile: Removed maps.o from the list.
+
+	* Makefile: added c_clonequit.o to the file list
+
+	* c_clonequit.c (cmd_CLONEQUIT): Added the CLONEQUIT command to cause the
+	specified clone to quit with the specified message.
+
+	* c_help.cc (cmd_HELP): Removed redundant include for maps.h.
+
+	* cmdmap.cc: Moved the privmsg command table to cmdmap.cc. Tom Rons brought
+	this to my attention...this makes a *lot* more sense.
+
+	* cmdmap.h: Moved the struct definition for privmsg table items here from
+	maps.h, as well as the extern declaration for PrivMsgTab. Also added the
+	prototype for the new CLONEQUIT command.
+
+	* help/CLONEQUIT: Added help file for new CLONEQUIT command.
+
+	* help/HELP: Modified to include notice about showcommands.
+
+	* m_nick.cc (msg_N): Removed an old for() loop that basically only does the
+	same thing as Token::Assemble when it grabs a new client's realname and
+	replaced it with a call to Assemble; also removes the leading ':' character.
+	Added a Gline variable for the loop that checks for glines that match this 
+	user's host or ip mask. So basically, instead of having 
+	(*gIter).second->Function() everywhere, we now use gline->Function(). This 
+	makes things a little easier to edit.
+
+	* m_privmsg.cc (msg_P): Removed redundant include for maps.h.
+
+	* maps.cc: Moved the ServMsgTab into msgmap.cc and the PrivMsgMap into
+	cmdmap.cc. This file is no longer necessary, so it is being removed.
+
+	* maps.h: Moved the struct declaration for ServMsgTabItem and the extern
+	declaration for ServMsgTab into msgmap.h; as well as the PrivMsgTabItem 
+	struct declaration and the extern declaration for PrivMsgTab into cmdmap.h.
+	I'm not exactly sure why I didn't put them here before, but they are here
+	now. Thanks to Tom Rons for bringing this up. This file is no longer 
+	necessary, so it is being removed.
+
+	* msgmap.cc: ServMsgTab moved here from maps.cc.
+
+	* msgmap.h: Struct declaration for ServMsgTabItem and extern declaration for 
+	ServMsgTab moved here from maps.h.
+
+	* network.cc: Remove include for maps.h and add include for msgmap.h in
+	accordance with the map changes described above.
+
+2002-03-01  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* stealth.conf: Added HIDDENHOST configuration value.
+
+2002-02-28  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* client.cc (Client): Removed unnecessary debug call.
+
+	* m_nick.cc (msg_NICK): Removed unnecessary debug call.
+
+2002-02-28  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* c_gline.cc (cmd_GLINE): Modified calls to match() to reverse true/false
+	logic to make more sense (i.e., !match() as opposed to match() for a positive
+	result).
+
+	* c_jupe.cc (cmd_JUPE): Modified match() calls.
+
+	* c_login.cc (cmd_LOGIN): Modified match() calls.
+
+	* c_scan.cc (cmd_SCAN): Modified match() calls.
+
+	* c_servinfo.cc (cmd_SERVINFO): Modified match() calls.
+
+	* c_trav.cc (cmd_TRAV): Modified output to include IP address...was only used
+	to debug a bug in which each user's real name was being duplicated in their
+	IP address field...only needed to do a clean compile.
+
+	* c_unjupe.cc (cmd_UNJUPE): Modified match() call.
+
+	* c_whois.cc (cmd_WHOIS): Modified whois output to show a user's fake host,
+	only if they have an account name set and have turned on the +x mode to mask
+	their host. Their real hostname still follows.
+
+	* client.cc (SetAccount): Added a call to SetHiddenHost when a user's account
+	name is set. However I really don't like the way this is done. Setting a 
+	user's account name doesn't really imply that they have +x turned on (which
+	is also impossible without having first logged in to a service that
+	broadcasts their account name). This call will be moved later to AddMode.
+
+	* client.cc (SetHiddenHost): Added function to set the user's fake host name
+	based on the HIDDENHOST configuration value.
+
+	* client.cc (GetHiddenHost): Added to return the user's hidden hostname, if
+	they have +x set. If not, just return their real hostname.
+
+	* client.cc (IsHostHidden): Added to return whether or not the user has the
+	+x usermode set.
+
+	* client.h: Added prototypes for IsHostHidden, SetHiddenHost, GetHiddenHost,
+	and added the private member c_hiddenhost.
+
+	* m_nick.cc (msg_NICK): Modified match() calls.
+
+	* match.cc (match): Inversed the value that is returned from cmatch so that
+	we can treat if(match(...)) as true, instead of the previous if(!match(...))
+	which really didn't make much sense.
+
+	* network.cc (RegisterSelf): Modified to directly set *self and *infoChan
+	based on what AddClient and AddChannel return, respectively. Just a minor
+	optimization.
+
+2002-02-26  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* help/*: Added all help files. Currently, they only show the correct syntax
+	for each command, but will be edited with full text help in the near future.
+
+2002-02-26  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* c_jupe.cc (cmd_JUPE): Modified to allow server masks. If the mask matches a
+	server, the server is juped -- and the same goes for any number of servers 
+	that matches the mask. This does, however, have safeguards to prevent opers 
+	from accidentally juping stealth's uplink, stealth itself, or any other 
+	servers that are already juped (according to what stealth has in memory).
+
+	* c_servinfo.cc (cmd_SERVINFO): Modified to allow a search mask so that if a
+	mask matches more than one server, the information is shown for those 
+	servers.
+
+	* c_unjupe.cc (cmd_UNJUPE): Modified to allow server masks, just as in the
+	JUPE command. If the mask matches more than one jupe, the matching jupes are
+	squitted and removed from the jupe map.
+
+2002-02-25  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* c_scan.cc (cmd_SCAN): Remove unnecessary debug calls.
+
+	* network.cc (RemServerTree): Remove unnecessary debug calls.
+
+	* network.cc (RemAllClients): Remove unnecessary debug calls.
+
+2002-02-25  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* Makefile: added c_reop.o to file list
+
+	* c_login.cc (cmd_LOGIN): When a user logs in successfully, call the correct
+	function (Client::SetAccount), which in turn calls Client::SetAccessRecord.
+	This eliminates a bug that wasn't setting the user's account name in memory
+	when they logged in.
+
+	* c_reop.cc (cmd_REOP): Added the REOP command, which takes one argument --
+	the nick of a service bot. Say we have an oper named 'A', and a service bot
+	named 'B'. If A requests that B be reopped on all channels B is on, B must
+	have the +k usermode set. If B does have +k turned on, stealth will op B on
+	all channels that B is on. Otherwise, if B is not a +k user, stealth will
+	tell A that B must be a service bot. This is a security measure to prevent
+	abuse by opers who want to be opped everywhere or malicious opers who attempt
+	things like takeovers.
+
+	* c_scan.cc (cmd_SCAN): Modified to try and debug the SQUIT bug. Also added
+	the *user variable to make editing the function a little easier; instead of
+	having '(*iter).second' everywhere, this makes it possible to use just 'user'
+	instead.
+
+	* client.cc (OpOnAllChans): Added the Client::OpOnAllChans function to op a
+	user on all channels they are on. This uses the private c_channels map in the
+	Client class -- the reason I added this is for the reop command. This was the
+	much simpler, cleaner solution, rather than adding functions to retrieve
+	iterators for the c_channels map, similar to the ones for the maps inside of
+	the Network class.
+
+	* client.h: Added the prototype for Client::OpOnAllChans.
+
+	* cmdmap.cc: Added a prototype for the REOP command.
+
+	* m_squit.cc (msg_SQ): Added the call to RemAllClients(servNum) back in,
+	since RemServerTree ONLY removes clients on servers who are UPLINKED to the
+	server being squit, and not clients on the squit server itself. This was the
+	pesky SQUIT bug that was causing stealth to core. It should no longer have
+	any problems.
+
+	* maps.cc: Added an entry into the PrivMsgTab for the REOP command (level 
+	700).
+
+	* network.cc (RemServerTree): Added some debug calls to see what on earth was
+	going on with the squit bug. Also moved the call to RemAllClients so that it
+	is called before RemServerTree is called...just to be safe.
+
+	* network.cc (RemAllClients): Remove redundant initialization of 'current,'
+	our iterator for traversing the clientMap. Also added a debug call to aid in
+	the pinpointing of the squit bug.
+
+2002-02-24  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* Makefile: Put debug flags back into the compiler and linker flags. There's
+	a pretty serious issue to track down, described below.
+
+	* m_squit.cc (msg_SQ): Removed extra call to RemAllClients to save a bit of
+	time and energy. We already call this for each server removed in
+	Network::RemServerTree. Plus, this may be what was causing stealth to core
+	when two servers squit in a row (one hub with a leaf behind it, and one leaf,
+	both of which are directly to stealth's uplink); shortly thereafter, doing
+	a 'scan *' caused it to core after listing about 3 clients. Not sure if this
+	will fix it... I can't reproduce the error when debugging symbols are
+	compiled in -- I can only reproduce it when they're not compiled in.
+
+	* network.cc (RemServerTree): Modified to do a case-sensitive comparison on
+	numerics rather than case-insensitive. Yikes.
+
+	* network.cc (RemAllClients): Modified to do a case-sensitive comparison on
+	user numerics, rather than a case-insensitive one. Also modified to call
+	getServNum instead of doing a substr -- just since we already have this
+	function available to use. No need to reinvent the wheel.
+
+	* stealth.h: Added some comments above each group of strCmp and strSCmp
+	prototypes so that we know whether or not each function is case-sensitive or
+	case-insensitive.
+
+2002-02-22  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* Makefile: Added files for cloneact, clonejoin, clonepart, clonesay.
+
+	* c_cloneact.cc (cmd_CLONEACT): Added the CLONEACT command, which will have 
+	an active clone perform an action on a channel.
+
+	* c_clonejoin.cc (cmd_CLONEJOIN): Added the CLONEJOIN command, which will
+	cause the specified clone to join the specified channel.
+
+	* c_clonepart.cc (cmd_CLONEPART): Added the CLONEPART command, which will
+	make the specified clone join the specified channel.
+
+	* c_clonesay.cc (cmd_CLONESAY): Added CLONESAY command, which causes the
+	specified clone say a string of text on a channel.
+
+	* client.cc (SetAccount): Modified SetAccount to also look for an accessMap
+	record that matches the username passed to SetAccount. If one is found, it
+	gives the user the proper amount of access.
+
+	* client.cc (SetAccessRecord): Added case to handle a NULL accessMap entry 
+	pointer, just in case.
+
+	* cmdmap.h: Added prototypes for CLONEACT, CLONEJOIN, CLONEPART, CLONESAY,
+	and also moved CLONE command up with the rest of the CLONE*'s.
+
+	* maps.cc: Added lines in PrivMsgTab for CLONEACT, CLONEJOIN, CLONEPART, 
+	CLONESAY, and moved CLONE to level 700 with the rest of the CLONE* commands.
+
+	* m_jupe.cc: Added some handler code for incoming JU (JUPE) messages. This
+	is untested, and I need to test it, which is why it's using a static 4096
+	as the server's numeric value.
+
+	* c_jupe.cc (cmd_JUPE): Fixed a bug that wasn't sending burst sequences with
+	a new jupe.
+
+	* m_jupe.cc (msg_JUPE): Fixed two small compile errors.
+
+2002-02-18  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* Makefile: Removed -g3 (debug stuff) from compiler and linker flags.
+
+	* c_jupe.cc (cmd_JUPE): Modified call to Register to remove bool value.
+
+	* c_show.cc (cmd_SHOW): Removed some unused variables that were causing 
+	annoying compile warnings.
+
+	* jupe.cc (Register): Removed sendBurst checks and moved all of the pertinent
+	stuff to RegisterWithBurst.
+
+	* jupe.cc (RegisterWithBurst): Moved all pertinent sendBurst stuff from
+	Jupe::Register to Jupe::RegisterWithBurst.
+
+	* jupe.h: Added prototype for RegisterWithBurst and modified Register one to
+	remove bool value.
+
+	* m_eob.cc (msg_EB): Modified CheckFlag for uplink check to use new
+	Server::IsUplink() instead.
+
+	* m_eoback.cc (msg_EA): Fixed so that we only send glines and jupes with a 
+	burst if we just got an EA from the uplink. Otherwise, send the glines. And
+	in all cases, set the SERV_BURST_ACK flag on for the server. For now, 
+	the call to SendJupesWithBurst is commented out, since I've modified the TS
+	on jupes sent during a burst. Hopefully this will declare the existing server
+	that the jupe replaces as a ghost and accepts the jupe. In other words, I
+	need this tested.
+
+	* network.cc (Register): Removed comments from RegisterJupes, since we want
+	them to be registered here now.
+
+	* network.cc (RegisterJupes): Modify call to Jupe::Register to remove bool.
+
+	* network.cc (RegisterJupesWithBurst): Added to call Jupe::RegisterWithBurst
+	for each jupe in the Jupe map.
+
+	* network.h: Modified RegisterJupes prototype (removing the bool), and added
+	prototype for RegisterJupesWithBurst.
+
+	* server.cc (IsUplink): Added IsUplink to return whether or not this is our 
+	uplink.
+
+	* server.h: Added prototype for IsUplink.
+
+2002-02-17  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* Makefile: Added c_settime.o and m_away.o for the 2 new handlers
+
+	* c_jupe.cc (cmd_JUPE): Fixed a bug that was sending the wrong jupe 
+	description
+
+	* c_map.cc (FormatLinks): Fixed a bug that was adding '|' to the first 
+	character of the server name when a server at depth 0 had a leaf and then a
+	hub attached. Also simplified (2i)-2 to 2(i-1) to make it a little easier
+	to understand whats going on.
+
+	* c_settime.cc (cmd_SETTIME): Added SETTIME command to send out a SETTIME 
+	notice with this server's current timestamp. The syntax on this protocol msg 
+	needs to be checked because the hub I sent it to didn't respond (yet its 
+	time was behind).
+
+	* channel.cc (RemUser): Added check to remove this channel if there are no
+	users left in it. This consolidates about 3 or 4 other instances in various
+	other files that did the same thing.
+
+	* cmdmap.h: Added SETTIME prototype.
+
+	* m_away.cc (msg_A): Added handler for AWAY messages. We don't do anything
+	with away's yet, but this is to avoid "UNKNOWN MESSAGE" errors in the info
+	channel.
+
+	* m_join.cc (msg_J): Removed extra check to remove channel if it has no users
+	left, since Channel::RemUser now does this.
+
+	* m_kick.cc (msg_K): Removed extra check to remove channel if it has no users
+	left, since Channel::RemUser now performs this check.
+
+	* m_leave.cc (msg_L): Removed check to remove channel if it has no users left
+	since Channel::RemUser now performs this check.
+
+	* maps.cc: Added handlers for server message "A" and command "SETTIME".
+
+	* msgmap.h: Added prototype for server message handler "A".
+
+	* network.cc (RemClient): Remove extra check to remove a channel if the
+	client we removed was the last client in the channel; Channel::RemUser now
+	performs this check.
+
+	* network.cc (AddJupe): Fixed the function definitions for AddJupe; the last
+	two arguments (desc and admin) were reversed on accident. This contributed to
+	the bug causing jupes to be sent out with a reason different than what was
+	specified.
+
+	* token.cc: Removed excessive code in 4 functions that was essentially doing
+	the same thing as each other instance, just with different delimiters in 2
+	of those cases. Now Token::Tokenize(buffer, delimiter) performs the actual
+	tokenization, and each other instance of that code is now replaced with a
+	call to Tokenize(string,string).
+
+	* token.cc (Tokenize): Added check to remove multiple consecutive delimiters 
+	before putting everything into the vector.
+
+2002-02-15  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* c_jupe.cc (cmd_JUPE): Modified call to AddJupe to include oper's nick.
+
+	* c_show.cc (cmd_SHOW): Added some code & params to the SHOW command. SHOW
+	OPERS lists all opers; SHOW JUPES lists all jupes; SHOW SERVERS lists all
+	servers; show GLINES lists all glines; SHOW USERLIST shows all users in the
+	access map.
+
+	* c_whois.cc (cmd_WHOIS): Reworked the WHOIS command a bit.
+
+	* client.cc (Client): Added case for USER_HIDEHOST, or +x in u2.10.11.
+
+	* client.cc (AddMode): Added case for USER_HIDEHOST / +x.
+
+	* client.cc (RemMode): Added case for USER_HIDEHOST / +x.
+
+	* client.cc (GetModes): Accounted for USER_HIDEHOST, in which case we append
+	'x' to the mode string.
+
+	* config.cc (LoadConfiguration): Modified to ignore any line starting with
+	'/' instead of doing a substr on (0,2). This way, we can also take care of
+	/* */ comments.
+
+	* config.cc (LoadUser): Added case to ignore commented-out lines.
+
+	* config.cc (LoadJupes): Added case to ignore commented-out lines and to pass
+	the juping oper's nick (from the file) to Network::AddJupe.
+
+	* flags.h: Added USER_HIDEHOST for umode +x in u2.10.11.
+
+	* jupe.cc: Added extra constructor to take the nick of the oper juping the
+	server.
+
+	* jupe.h: Added prototype for new constructor. Also added two new member
+	functions, GetReason to return the jupe reason and GetAdmin to return the
+	nick of the oper who juped the server. Also added the private member s_admin
+	to store this.
+
+	* network.cc: Added two new overloaded copies of AddJupe, to take an extra
+	argument for the oper who is juping the server.
+
+	* network.h: Added functions to return iterators to the front and end of the
+	Jupe map. Also added the prototypes for the two new overloaded AddJupe's.
+
+2002-02-14  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* c_broadcast.cc (cmd_BROADCAST): Added another safeguard so that we dont
+	send a broadcast to any clones on the bot's server, since it could cause an
+	infinite loop replying to itself with bad syntax messages.
+
+	* c_clone.cc (cmd_CLONE): Removed +k from clients created with the CLONE
+	command.
+
+	* m_privmsg.cc (msg_P): Added a safeguard to not reply or accept messages
+	from clients/clones on this server. Also added a more descriptive error
+	message sent to a non-oper when they try to use this service.
+
+2002-02-12  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* ChangeLog: Fixed typo -- the bug wasn't in c_uptime.cc, but rather in
+	network.cc.
+
+	* network.cc (GetUptime): Fixed typo that prevented days from being reported
+	correctly.
+
+2002-02-11  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* dbfiles: Added dbfiles directory with sample configuration files. Lines can
+	be commented out by prefixing them in any of the following ways: (no tabs)
+		# comment
+		; comment
+		// comment
+
+2002-02-11  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* c_whois.cc (cmd_WHOIS): Added line to show list of channels that the user
+	is on, along with their modes on the channel, if applicable (using the chars
+	"+@", in that order).
+
+	* chanclient.cc: Added extra constructor to set the channel's name in the
+	c_cname member variable. Also added the accessor GetChanName to return the
+	channel name, and the mutator SetChanName to set the channel name.
+
+	* chanclient.h: Added prototype for new constructor and two new functions,
+	as well as the new c_cname member variable.
+
+	* channel.cc (AddUser): Modified calls to ChannelClient constructors to pass 
+	string containing channel name, and added a call to Client::AddChan. 
+	
+	* channel.cc (RemUser): Added a call to Client::RemChan.
+
+	* client.cc: Added functions GetChanlist, to return a string with a list of
+	channels and the user's op/voice mode on them, if applicable; AddChan, to 
+	add a channel to the user's internal channel list; RemChan, to remove a 
+	channel from the user's internal chan list; and IsOnChan, to return true if
+	a channel is in the user's channel map, and false otherwise.
+
+	* client.h: Added prototypes for the above-listed functions and added the
+	member function c_channels. We also had to forward-declare ChannelClient
+	here since Client would have needed to include ChannelClient, which needed
+	to include Client -- ChannelClient needed Client to be declared before hand,
+	and Client needed ChannelClient to be declared before hand. So it kind of got
+	stuck there--but this forward declaration fixes this problem.
+
+2002-02-11  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* Makefile: Added c_opermsg.o and c_refreshg.o to the obj. file list.
+
+	* c_ctcp.cc (cmd_CTCP_PING): Remove the extra trailing \001 from the ping 
+	response, since we're already going to be using the one at the end of
+	tokens[4].
+
+	* c_invite.cc (cmd_INVITE): Added checks to return an error if the user is
+	already on the channel they are asking to be invited to. And if the bot they
+	msg'd with this request is already on the channel, just ensure they are opped
+	and send the invite. Otherwise, join the chan, op the bot, invite the user,
+	and then leave the chan.
+
+	* c_mode.cc (cmd_MODE): Added the character "*" to the parameter buffer when
+	removing a channel key, since it did not remove it without the *. And there
+	is no need to spend extra time getting and appending the channel's actual key
+	when a * does the job just fine.
+
+	* c_opermsg.cc (cmd_OPERMSG): Added the OPERMSG command, which is just a
+	broadcast message to all opers. Especially useful for opers who don't pay any
+	attention to wallops.
+
+	* c_refreshg.cc (cmd_REFRESHG): Added the REFRESHG command, which provides a
+	way for opers to synchronize glines across the entire network. It simply
+	sends all glines by calling the existing Network::SendGlines function.
+
+	* channel.cc: (Channel::FindUser): Added a return NULL at the bottom of the
+	function, in case a user is not found. Otherwise it would always return a
+	pointer to the last user in the channel's member list.
+
+	* cmdmap.h: Added prototypes for REFRESHG and OPERMSG command functions.
+
+	* m_join.cc (msg_J): Updated to allow (i.e., not segfaulting) and parse a
+	comma-delimited list of channels. Also updated to not core on JOIN 0 -- in
+	this case it now traverses the channel map and attempts to remove the user
+	from each channel without checking IN THIS SCOPE. Channel::RemUser checks
+	to see if the user is in the list first -- so there's no reason to do another
+	check here. Otherwise we'd have O((n^2)m) compared to O(nm), where n is the 
+	number of channels and m is the number of members per channel. Much better.
+	Much thanks to Tom Roms <trons@users.sourceforge.net> for these two major 
+	fixes.
+
+	* m_leave.cc (msg_L): Updated to parse a comma-delimited list of channels
+	that the user is parting. 
+	Much thanks to Tom Rons <trons@users.sourceforge.net> for this fix.
+
+	* maps.cc: Re-added W/msg_W to the server message table -- for some reason it
+	had gone missing in an earlier revision. Added REFRESHG and OPERMSG into the
+	private message table.
+
+	* msgmap.h: Re-added prototype for msg_W. Again, not sure what happened to it
+	before.
+
+	* network.cc: Remove extraneous check before removing the user from the
+	channel. Channel::RemUser already does a check, so there's no reason to make
+	this double the amount of work.
+	Much thanks again to Tom Rons <trons@users.sourceforge.net> for pointing out 
+	this issue and for all the above-credited patches. :)
+
+2002-02-10  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* ChangeLog: Modified older entries to follow GNU ChangeLog format.
+
+	* c_uptime.cc (cmd_UPTIME): Prepended now-modified Network::GetUptime output
+	with "Uptime" string.
+
+	* m_stats.cc (msg_R): Added code for the stats handler. Currently, it only
+	replies with output for /stats u serv*, and a simple 219 numeric (end of 
+	stats).
+
+	* network.cc (Network::GetUptime): Don't prefix the buffer with "Uptime" --
+	especially for things like /stats u where we're following a specific format.
+	Simply make the first character a null termination character.
+
+	* stealth.cc: Modified the modes for the info chan for my local testnet.
+	Nothing of concern, really.
+
+2002-02-09  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* m_create.cc: Modified create handler to parse multiple channels from the
+	same line (i.e., "#chan1,#chan2").
+
+	* m_join.cc: Modified join handler to parse multiple channels from the same
+	line, same as above.
+
+	* network.cc: Modified RemClient so that, if a user was the last user in any 
+	of the channels they were on, it will remove the channel since it would then
+	be empty.
+
+2002-02-08  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* Makefile: Added c_invite.o to the file list
+
+	* c_invite.cc: Added file and wrote code for the INVITE command.
+
+	* cmdmap.h: Added prototype for INVITE command.
+
+	* m_privmsg.cc: Gave stealth the capability to respond to messages sent to it
+	using nick@server form. Actually, it accepts the message for *any* nick on
+	its server or jupes; if the nick used actually exists, it replies with that
+	nick (but has to translate it into a numeric first); on the other hand, if it
+	does not exist, it simply replies with NNAAA, where NN is the server's 
+	numeric.
+
+	* maps.cc: Added line in the privmsg/command table for the INVITE command.
+
+2002-02-08  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* c_jupe.cc: Added code for JUPE command. On a side note, all jupes use
+	randomly generated numerics in the 3096-4095 range.
+
+	* c_unjupe.cc: Added code for UNJUPE command.
+
+	* jupe.cc: Added a safeguard in Register so that an existing server is
+	squitted before the jupe is introduced. Also added a toggle (sendBurst) so
+	we know when to send bursts for the juped server (i.e., not during initial
+	net.bursts).
+
+	* jupe.h: Modified prototype for Register and added GetName and GetNumeric.
+	
+	* m_eoback.cc: Modified to register jupes *after* the net.burst.
+
+	* network.cc: Don't send jupes until after the EOB_ACK. Also modified
+	RegisterJupes for the new argument.
+
+	* network.h: Made changes accordingly, adding bool flag to RegisterJupes to
+	get passed on to Jupe::Register.
+
+2002-02-08  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* Makefile: Added files for c_adduser, c_ban, c_help, c_moduser, c_remuser, 
+	c_servinfo, c_set, c_show, c_unban, c_whoison
+
+	* access.cc: Added function SetPassword to retrieve the user's password. Also
+	modified AddHost to do a case-insensitive search before adding to the host
+	list.
+
+	* access.h: Added prototype for SetPassword.
+
+	* c_adduser.cc: Added file and code for ADDUSER command. All of the necessary
+	safeguards, like trying to add someone with a higher level, have been
+	addressed.
+
+	* c_ban.cc: Added file and code for BAN command. Pretty self-explanatory.
+
+	* c_help.cc: Added file and code for HELP command. If no arguments are given,
+	it simply shows general help (held within the HELPDIR/HELP file). Before
+	sending each line of the file to the user, it substitutes %N with the bot's
+	nick, %S with the bot's server, and %L with the command level.
+
+	* c_login.cc: Fixed a bug that was allowing suspended users to log in.
+
+	* c_logout.cc: Fixed a bug that reported the user being logged out when they
+	were not even logged in to start with. Now, if a user attemps the logout
+	command if they are not logged in, they will receive a correct error message.
+
+	* c_moduser.cc: Added file and code for the MODUSER command. It takes the
+	following parameters:
+		* PASSWORD - change the user's password
+		* LEVEL - change the user's level
+		* ADDHOST - add a hostmask to the user's hostmask access list
+		* REMHOST - remove a hostmask from the user's hostmask access list
+		* SUSPEND - suspend a user (on/off)
+		* NICK - give the user a new nickname
+	All of the necessary safeguards have been addressed -- a user may not modify
+	a user whose level is greater than or equal to their own. In other words,
+	your access level has to be higher than the person's you are modifying.
+
+	* c_remuser.cc: Added file and code for the REMUSER command. This simply
+	removes a user from the access map, provided that the user who is removing
+	the record has a level greater than the person they are removing.
+
+	* c_servinfo.cc: Added file and code for the SERVINFO command. This command
+	simply returns some general information about the server.
+
+	* c_set.cc: Added file for SET command, which will be a command to set
+	general configuration options during runtime.
+
+	* c_show.cc: Added file for SHOW command, which will show general information
+	based on what the user supplies as the parameter.
+
+	* c_unban.cc: Added file and code for UNBAN command. Pretty self-explanatory.
+
+	* c_whoison.cc: Added file and code for WHOISON command. This command will
+	show an oper the nick of each person on a channel, with a "@" or "+" beside
+	their nick if they are opped and/or voiced, respectively. It sends a maximum
+	of 20 nicks per line.
+
+	* cmdmap.h: Added prototype lines for SET, ADDUSER, MODUSER, REMUSER, BAN,
+	UNBAN, HELP, SERVINFO, SHOW, WHOISON. Moved around a few already-existing
+	lines to match the descending access level required, the same order as in
+	maps.cc.
+
+	* m_nick.cc: Added a line to set the server's next numeric value (kept in
+	integer format) every time a NICK message is received.
+
+	* m_server.cc: Cleaned up some old code which can now be replaced with
+	params.Assemble(). Also fixed a parsing bug that was grabbing the description
+	of a server one parameter too early.
+
+	* maps.cc: Added lines for SET, ADDUSER, MODUSER, REMUSER, BAN, UNBAN, HELP,
+	SERVINFO, SHOW, WHOISON. Also moved around mode to level 300, since it allows
+	bans to be [un]set -- and BAN/UNBAN are at level 300. Leaving it at 100 would
+	be a security risk -- even though BAN/UNBAN would be level 300, level 100
+	users would have been able to set bans with the MODE command. So now it's at
+	level 300.
+
+	* server.cc: Now initializes s_intNum (numeric representation of server 
+	numeric) in the Server constructor. Also added the NumericSet function, which
+	will set the server's numeric count based on the numeric passed to the
+	function.
+
+	* server.h: Added prototype for NumericSet(string).
+
+	* stealth.conf: Added HELPDIR parameter, which is the directory under which
+	the server will look for help files. This value should NOT have a trailing
+	slash '/' on the end.
+
+2002-02-07  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* c_deop.cc: Modified deop command to allow no nick arguments, in which case
+	we deop the user who sent the command.
+
+	* c_mode.cc: Wrote code for MODE command. I need to have this tested
+	extensively in a live environment.
+
+	* c_op.cc: modified op command to allow no nick arguments, in which case we
+	would op the user sending the command.
+
+	* channel.cc: Reversed the order in which 'k' and 'l' are appended to the
+	mode string in GetModeString, since it was showing them backwards when
+	getting modes for a +lk channel.
+
+	* m_invite.cc: Modified to create the channel the bot is being invited to, if
+	it does not already exist (i.e., an oper invites the bot to an empty or
+	nonexistent channel). Otherwise, just do a join and op the bot. Also modified
+	to add the bot to the channel's user list - forgot to do this before.
+
+	* maps.cc: Modified DEOP and OP to only require one argument (channel). If
+	no nicks are specified, it uses the user's nick to op/deop them accordingly.
+
+2002-02-07  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* c_broadcast.cc: Modify broadcast command so that it does not send the
+	broadcast to service bots.
+
+	* client.cc: Defined IsService() function.
+
+	* client.h: Declared IsService() function, which simply returns whether or
+	not this user is a service bot (has mode +k).
+
+	* gline.cc: Added Register() member function, which will send this gline to
+	the rest of the network (i.e., if there is another server that does not have
+	it).
+
+	* gline.h: Declared Register() member function.
+
+	* m_nick.cc: Added safeguard to only set the user's account name if one has
+	been sent through. Also added a check to see if a user matches any of the
+	glines in the gline map. If so, and if the user's server has acknowledged the
+	end of the burst, the service will send the gline out. Thus, no client that
+	matches any of the glines in memory can get back onto the network unless the
+	gline is removed from the map.
+
+	* m_privmsg.cc: Added a safeguard so the bot will not reply to privmsg/notice
+	commands if the source user is a service bot.
+
+	* maps.cc: Added msg_P as the handler for the O (NOTICE) token. This way,
+	opers can send commands via /notice as well.
+
+	* network.cc: Removed last traces of DEBUGCHAN and PROTOCHAN. Modified
+	SendGlines to use the new Gline::Register() function.
+
+	* stealth.cc: Removed last traces of CHAN_PROTO.
+
+2002-02-07  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* .cvsignore: Added ignore for vnet.conf, which is a conf I keep around to
+	test this in a live IRC environment on Virtuanet (irc.virtuanet.org).
+	
+2002-02-06  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* c_gline.cc: Commented out now unused variables that were used to calculate
+	the server's GMT offset and if it was currently DST in this time zone. Since
+	it is not used, it has been commented out. Also fixed a bug that was causing
+	a segfault -- was simply a %s that should have been a %ld in a vs_arg format
+	statement. Fixed a bug that was chopping off the last character in the expire
+	date string. Modified the AddGline call to pass the dropCount to the gline
+	map. Also added a reverse check when adding a new gline that might already
+	exist. 
+
+	* c_remgline.cc: Added code for REMGLINE command. Since glines may
+	occasionally be out of synch due to server downtimes and/or the absence of
+	services, it still sends out the command to remove the gline even if it does
+	not have that gline in the gline map.
+
+	* gline.cc: Modified constructors to initialize g_numhosts to 0, and added a
+	constructor that takes numHosts as an argument and initializes it
+	accordingly. Also finally defined the GetExpireTime and GetSetTime functions,
+	already declared in the gline class.
+
+	* gline.h: Added an extra constructor that will take numHosts as an extra
+	argument, added an accessor to return g_numhosts. Also added the private
+	member variable. Numhosts refers to the number of hosts that this gline
+	affects, and is only really used in consistency when re-synchronizing the
+	network's glines after a server sends its EB (END_OF_BURST) token.
+
+	* m_eoback.cc: Add line to call Network::SendGlines, which will send all of
+	the glines currently in the gline map for this network. This ensures that
+	all servers that rejoin after a split will have a valid list of glines.
+
+	* m_gline.cc: Added code to account for the removal of glines that are sent
+	by other services/servers.
+
+	* network.cc: Defined overloaded version of AddGline, which simply takes
+	numhosts as another argument. Also changed all void* to void...not sure why
+	they were void* to begin with. Defined the SendGlines function, which will
+	traverse the gline map and send out a GL message for each gline in the map.
+	This is used to re-synchronize glines when a server rejoins the network, when
+	it may not have a complete list of glines. Changed all instances of 
+	DEBUGCHAN/PROTOCHAN to INFOCHAN, and instances of DEBUGMODES/PROTOMODES to 
+	INFOMODES. Removed unnecessary code that accounted for different DEBUG and 
+	PROTO channels.
+
+	* network.h: Added prototype for the overloaded AddGline function; added the
+	prototype for SendGlines, and changed void *RemGline to just void RemGline.
+
+	* stealth.cc: Modified Debug to send every type of debug message to the info
+	channel. This is not used enough to have a separate channel for each type of
+	debug message. Everything now goes to the INFOCHAN defined in the conf.
+
+	* stealth.conf: Removed DEBUGCHAN, DEBUGMODES, PROTOCHAN, PROTOMODES from the
+	configuration since they will no longer be used.
+
+	* types.h: Remove CHAN_PROTO from the DebugMsgType, since it is not used any
+	longer.
+
+2002-02-06  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* Makefile: Added match.o to the object file list
+
+	* c_gline.cc: Added code for GLINE command. Before adding and sending the
+	gline, it ensures that the gline does not affect any admins with higher or
+	equal access to the person setting the gline. It also makes sure the gline
+	is not already covered by another gline.
+
+	* c_login.cc: Added hostmask matching to the LOGIN command, and a safeguard
+	to prevent sending out the AC token if the user has already had an account
+	name set.
+
+	* match.cc: Added match functions, courtesy of IRCore's CS5.1, written by
+	Chris Birch (Opus).
+
+	* stealth.h: Added necessary prototypes for matching functions in match.cc.
+
+	* stealth.conf: Added INFOCHAN variable to configuration. INFOCHAN is a
+	a channel where general information is sent.
+	
+2002-02-05  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* c_map.cc: Small bit of optimization -- we no longer use the children member
+	of the Link struct, so remove all references to and operations with it.
+
+	* types.h: Remove the children member from the Link struct.
+
+2002-02-05  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* Makefile: Added jupe.o to the file list
+
+	* c_map.cc: Wrote code for the MAP command. And no, it doesn't ask ircu for 
+	the map. It generates its *own* map. :)  GetLinks traverses the server map 
+	recursively, puts in the necessary number of spaces and a preceding dash
+	(2 spaces per nest level, and a dash on the very last space), and modifies
+	a vector<List>, which holds the name, depth, and number of children for each
+	server. It then gets passed to FormatLinks, which formats it, ircu-style.
+	Pretty simple math behind it, too.
+
+	* c_trav.cc: The TRAV command now shows hop count on servers.
+
+	* config.cc: Commented out Load...() calls in the constructor -- this was
+	somehow causing a problem where things were not set in c_options before being
+	used in other Load() functions, yet LoadConfiguration is the only function
+	that modifies c_options. But it works fine now having each one called from
+	the Network::LoadConfiguration function instead. Also wrote the LoadJupes
+	function, which loads jupes from DATADIR/jupes.dat in the format of:
+		ServerName ServerNum ServerStartTS ServerDesc
+	The servernum is in integer format, and the ServerStartTS is in unix
+	timestamp format. This file should only be modified from a command on stealth
+	(which will be added soon) -- unless you *really* know what you're doing.
+
+	* jupe.cc: Added the Jupe class, which inherits everything from the Server
+	class. The jupe map just holds a Register() function, which sends a server
+	line to the uplink with the juped server's details.
+
+	* jupe.h: Added header file for Jupe class. Details above.
+
+	* network.cc: Added lines to register jupes, clones, and extra channels on
+	startup. Also modified LoadConfig to directly call LoadUsers and LoadJupes,
+	due to the above mentioned problem in the Config constructors. Modified calls
+	to IntToBase64 to use the new length argument. Added the AddJupe function,
+	to add a new jupe; the FindJupeByName and FindJupeByNum functions, to search 
+	for and return a jupe from the jupe map; and RegisterJupes to call the 
+	Register function on every jupe in the map (for startup).
+
+	* network.h: Added include to jupe.h, defined JupeMapType, added functions
+	that interface with the jupeMap, and added the jupeMap itself.
+
+	* server.h: Set the deconstructor to a virtual function since Jupe inherits
+	everything from Server. Also wrote a GetHopCount function to return the
+	hopcount for a server.
+
+	* stealth.cc: Modified Debug() to not cout twice in some cases. Modified the
+	IntToBase64 function to take a count/length argument, since we will be using
+	this function for converting server numerics *and* user numerics.
+
+	* stealth.h: Modified prototype for IntToBase64, and added prototypes for
+	FormatLinks and GetLinks, two extra functions that are used in c_map.cc to
+	return a map command in ircu format.
+
+	* types.h: Added PROG_INFO and PROG_ERR to DebugMsgType, for doing cout's
+	without having to send to the debug/info/proto channel. Also added the Link
+	struct, which is used to store information when retrieving and formatting a
+	visual server map with the MAP command.
+	
+2002-02-04  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* Makefile: Removed m_part.o.
+
+	* c_trav.cc: Added code to traverse gline map, and modified Debug() messages
+	to use new debug format.
+
+	* channel.cc: Modified debug format.
+
+	* m_desynch.cc: Added code to handle DESYNCH messages by sending it to the
+	debug channel.
+
+	* m_error.cc: Modified debug format.
+
+	* m_part.cc: Removed file since we should never receive a PART message. It
+	should always be L (LEAVE).
+
+	* m_pass.cc: Add comment so people don't think I'm senile.
+
+	* m_silence.cc: Add comment so people don't think I'm senile.
+
+	* m_wallops.cc: Added code to handle WALLOP messages by sending them to the
+	info channel.
+
+	* m_wallusers.cc: Added code to handle WALLUSERS messages by sending them to
+	the info channel.
+
+	* m_whois.cc: Remove some whitespace.
+
+	* maps.cc: oops, {"W", msg_W} should be {"WU", msg_WU}. Was getting an
+	unknown message error on every WALLUSERS (WU).
+
+	* msgmap.h: Modified prototype for W to WU.
+
+	* network.cc: Modified debug format.
+
+	* stealth.cc: Modified Debug() to send messages to certain places depending
+	on the type passed in the first argument. The possible values of the type
+	variable are pretty much self-explanatory: CHAN_DEBUG, CHAN_PROTO, CHAN_INFO.
+	It also takes an argument, "title", that will prefix the message and put into
+	bold type when sending to the channel.
+
+	* stealth.conf: Added INFOCHAN variable. This is a channel in which the bot
+	should send general information to.
+
+	* stealth.h: Modified prototype for Debug to reflect the changes mentioned
+	above.
+
+	* types.h: Added DebugMsgType for the new Debug function with the possible
+	values of CHAN_DEBUG, CHAN_PROTO, CHAN_INFO.
+
+2002-02-04  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* c_login.cc: Added line to set the user's account name when they log in, and
+	send out an AC token to the other servers with their account name.
+
+	* gline.cc: Renamed g_admin to g_oper -- this is more appropriate.
+
+	* gline.h: Changed 'long' references to 'time_t'. Also added prototypes for
+	GetSetTime, and GetSetTS (not yet written, but will simply do a ctime
+	conversion). Also changed capitalization on Gline's other member functions.
+	As mentioned above, renamed g_admin to g_oper.
+	
+	* m_admin.cc: Wrote code to respond to remote /admin requests. The last line
+	is a line that is loaded from the configuration file -- ADMINLINE.
+
+	* m_gline.cc: Added code to add a gline to the msgmap when it is sent via
+	another server. If it already exists, it is replaced.
+
+	* m_invite.cc: Added code that allows bots to respond to /invites. If the
+	user who invited the bot is an oper, the bot that was invited will join.
+	Otherwise, the request is ignored.
+
+	* network.cc: Added code for AddGline, FindGlineByMask, and RemGline member
+	functions. Their names are self-explanatory and use the glineMap.
+
+	* network.h: Added the gline map to the network class, and the following
+	functions to work with it: GlineIter(), GlineTail(), AddGline(),
+	FindGlineByMask(), RemGline(). Also added glineMap as a member function; it,
+	similar to the the other maps, is a map<string, Gline*, less<string> >.
+
+2002-02-03  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* c_clone.cc: Added code for CLONE command, which just takes nick, ident,
+	host, and real name as arguments. It finds the next numeric on its own.
+
+	* c_quote.cc: Cleaned up a lot of old code in cmd_QUOTE.
+
+	* network.cc: Added code in AddClient to increment the server's numeric count
+	whenever adding a new client. Also added the GetNextNumeric function, which
+	will return a server's next available numeric. It does not account for old
+	numerics that have already been used but are no longer in use.
+
+	* network.h: Added prototype for GetNextNumeric(string).
+
+	* server.cc: Added variable in constructor initializers to set s_numCount to
+	zero. Also added the NumericInc function, which will increment s_numCount,
+	and NumericCount(), which will return the number of the next available
+	numeric on that server.
+
+	* server.h: Added prototypes for NumericInc() and NumericCount(), and the
+	new private variable s_numCount.
+
+	* stealth.cc: Added IntToBase64(int) function to convert an integer to its
+	ircu-Base64 representation.
+
+	* stealth.h: Added prototype for IntToBase64(int).
+
+2002-02-03  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* c_voiceall.cc, c_voice.cc,
+	  c_opall.cc, c_devoiceall.cc, 
+	  c_devoice.cc, m_account.cc: Oops, forgot to do a cvs add on these new
+	  files.
+
+2002-02-03  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* Makefile: Added c_devoice.o, c_voice.o, c_opall.o, c_deopall.o, 
+	c_voiceall.o, c_devoiceall.o to the object file list. Also gave each object
+	file its own line to make it easier to add new files to the list without
+	having to worry about messing up line lengths.
+
+	* c_broadcast.cc: Added safeguard so that a broadcast message is not sent to
+	the bot's own server -- because it would then try to handle that message.
+
+	* c_chanlist.cc: Added code for CHANLIST command. Shows channel names, modes,
+	and user count.
+
+	* c_deop.cc: Added code for DEOP command.
+
+	* c_deopall.cc: Added DEOPALL command and the necessary code for it.
+
+	* c_devoice.cc: Added DEVOICE command and the necessary code for it.
+
+	* c_devoiceall.cc: Added DEVOICEALL command as well as its code.
+
+	* c_kick.cc: Wrote code for KICK command.
+
+	* c_op.cc: Wrote code for OP command.
+
+	* c_opall.cc: Added OPALL command and the code for it.
+
+	* c_voice.cc: Added VOICE command and its code.
+
+	* c_voiceall.cc: Added VOICEALL command and its code.
+
+	* channel.cc: Added two new member functions: OpAll and VoiceAll.
+
+	* channel.h: Added prototypes for OpAll and Voiceall.
+
+	* cmdmap.h: Added prototype lines for DEOPALL, DEVOICEALL, OPALL, VOICEALL,
+	VOICE, DEVOICE.
+
+	* m_account.cc: Added handler for ACCOUNT, which will set a user's account
+	name when it receives the AC token from another server. 
+
+	* m_error.cc: Removed unnecessary crap from the ERROR handler -- no server
+	token gets sent with an ERROR, so dont expect one.
+
+	* maps.cc: Added line in the ServMsgTab for the AC (ACCOUNT) token. Also
+	added lines in the PrivMsgTab for DEOPALL, DEVOICEALL, OPALL, VOICEALL, 
+	DEVOICE, and VOICE commands.
+
+	* msgmap.h: Added handler prototype for the AC (ACCOUNT) token.
+
+	* stealth.conf: Changed hostname to its internal IP for my testnet. Nothing
+	of great importance.
+
+2002-01-30  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* c_whois.cc: Added notice with account name, if user has one.
+
+	* client.cc: Added case to add USER_ACCOUNT to c_flags if 'r' is an included
+	mode. Also made the same accomodations in RemMode and GetModes. Removed the 
+	redundant copies of "clientFlags::" on each client flag, since it already 
+	uses the namespace clientFlags. Added SetAccount, to set a client's account 
+	name (from the AC server token); GetAccount, to return the client's account 
+	name.
+
+	* client.h: Added necessary prototypes for the above described functions.
+	Also added the c_account member to store the user's account name (sent via
+	the AC server token).
+
+	* flags.h: Added user mode for +r, the new ACCOUNT feature in u2.10.11.
+
+	* m_destruct.cc: Oops, I mixed up the DE and DS tokens in the msg_DE and
+	msg_DS function names. This is now fixed.
+
+	* m_desynch.cc: Fixed function name as described above.
+
+	* m_nick.cc: Modified for efficiency and conciseness, and also modified for
+	retrieving the account name, in case one is sent in a NICK line.
+
+	* network.cc: Added code in RemClient to remove a client from all channels
+	they are currently in before removing them from the clientMap. Also made
+	numerous replacements to use ClientMapType/ServerMapType/ChannelMapType
+	wherever they could have been used, rather than map< ... >.
+
+2002-01-30  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* Makefile: added c_write.o to the object file list
+
+	* access.cc: Added GetHostList function to return a space-delimited string
+	of all the hosts in the list.
+
+	* access.h: Added necessary prototype.
+
+	* c_write.cc: Added WRITE command that will initiate a call to write out all
+	data files.
+
+	* cmdmap.h: Added prototype entry for WRITE command.
+
+	* config.cc: Wrote a SaveUsers function that will save the users in the
+	access map to a file.
+
+	* config.h: Added necessary prototypes. The other 3 functions I added
+	prototypes for do not yet exist, but probably will on the next commit.
+
+	* m_mode.cc: Fixed a bug that wasn't adding modes 'l' or 'k' when someone did
+	a mode change on a channel and included one or both of those modes. Also
+	fixed a compile error that resulted from copying and pasting.
+
+	* maps.cc: Added a line for the WRITE command, which is a level 900 command
+	and requires zero parameters.
+
+	* network.cc: Added a SaveData function to initiate a call to the
+	Config::SaveUsers function -- which we need by cmd_WRITE and we will need it
+	by a SIGINT and SIGKILL handler in the future.
+
+	* network.h: Added necessary prototype for SaveData.
+
+2002-01-29  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* c_clearchan.cc: Wrote the code for the CLEARCHAN command. If called with
+	flag 'm', it will clear channel modes; if with 'o', will deop all ops; if
+	with 'v', will devoice all voiced users; if with 'b', will clear all bans.
+	The 'k' flag is recognized but unimplemented thus far.
+
+	* channel.cc: Added DeopAll function to deop all opped users on a channel in
+	groups of, at most, 6 users. DevoiceAll does the same thing, the same way.
+	Also added the ClearModes function to set c_modes to CHAN_NONE, mostly for
+	the CLEARCHAN command and the msg_CM (CLEARMODE) handler. Added the ClearBans
+	function to clear all bans from a channel and then clear the ban list in
+	memory. 
+
+	* channel.h: Added necessary prototypes.
+
+	* m_clearmode.cc: Wrote code for msg_CM, the CLEARMODE server message
+	handler.
+
+	* m_destruct.cc: Wrote code for msg_DS, the DESTRUCT server message. This
+	simply removes the channel from memory.
+
+	* m_eob.cc: On an EB, set the server flag that says the server has sent its
+	burst.
+
+	* m_eoback.cc: On an EA, set the server flag that says the server has
+	received our burst and EB successfully.
+
+	* m_error.cc: Print a Debug() message on an ERROR server message (usually
+	during connect time).
+
+	* m_kick.cc: Removed *user and Debug messages from msg_K. These are no longer
+	needed.
+
+	* m_kill.cc: Wrote code for KILL message. Simply removes the client from the
+	user map.
+
+	* m_leave.cc: Removed unnecessary debug message.
+
+	* m_topic.cc: Wrote code for TOPIC handler -- it will now set the channel's
+	topic in memory according to what is sent in a TOPIC message.
+
+	* Other: Removed lots of whitespace...3 lines is a bit excessive in some
+	cases.
+
+2002-01-29  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* channel.cc: Added an overloaded Channel::AddUser(string) function since
+	msg_J (JOIN) may call it without usermodes, in which case we would just
+	insert the user into the new channel's map with no channel client flags.
+	Also added the UserCount function to return the number of users in the
+	c_users list, and a HasUsers function to return whether or not the user map
+	contains any users. Added the BanCount function to return the number of bans
+	on the channel and HasBans to return true if the ban map contains any ban
+	masks.
+
+	* channel.h: Added necessary prototypes.
+
+	* m_create.cc: Added code for msg_C (CREATE) -- it adds everything
+	accordingly - the channel is created, and the user is inserted with the 'o'
+	channel flag.
+
+	* m_join.cc: Added code for msg_J (JOIN). It simply adds the user to the
+	channel map with no flags -- this is what the overloaded Channel::AddUser
+	function was for.
+
+	* m_kick.cc: Added code for msg_K (KICK). It simply removes the user from the
+	channel user list, and makes sure that the channel still exists. If not
+	(i.e., if the user kicked themself), it destroys the channel just as it would
+	in msg_L (LEAVE).
+
+	* m_leave.cc: Added code for msg_L (LEAVE). It removes the user from the
+	channel user list and ensures that the channel still has users in it. If it
+	does not, the channel is removed from the channels map.
+
+2002-01-29  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* channel.cc: Fixed typo - whichmode should be whichMode. Made small
+	semantic changes while trying to debug RemBan, which was coring due to a
+	missing return statement.
+
+	* m_mode.cc: Fixed compile errors, missing a .c_str() when trying to use
+	atoi on a string. Removed now-unnecessary debug calls. Also fixed a typo
+	that was setting ops for a +v. Added case handlers for channel modes +b,
+	+o, and +v. Removed special cases for +k and +l since we don't really need
+	to do much else with them. When handling client modes, and the client
+	removes their oper flag (-o), the bot checks if they are logged in. If so,
+	they are deauthenticated. (Doh, this is an oper-only service. no cheating!)
+	
+2002-01-29  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* channel.cc: Defined the Channel::AddMode(char) and Channel::RemMode(char)
+	functions, which, based on their char argument, will call 
+	Channel::AddMode(modeType) and RemMode(modeType) respectively, with the 
+	proper flag from channelFlags.
+
+	* channel.h: Declared Channel::AddMode(char) and Channel::RemMode(char) 
+	(described above).
+
+	* client.cc: Defined the Client::AddMode(char) and Client::RemMode(char) 
+	functions, which, based on their char argument, will call 
+	Client::AddMode(modeType) and Client::RemMode(modeType) respectively, with 
+	the proper flags from the clientFlags namespace.
+
+	* client.h: Declared Client::AddMode(char) and Client::RemMode(char),
+	described above.
+
+	* m_mode.cc: Wrote code for msg_M (MODE) parser. Has not yet been tested.
+
+2002-01-25  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* access.h: Fixed inconsistency in case of Access member function name
+
+	* c_login.cc: Fixed inconsistency in case of Access member function name
+	
+	* c_operinfo.cc: Fixed inconsistency in case of Access member function name
+
+	* client.cc: Fixed constructor -- XXYYY is now c_num. Also fixed
+	inconsistencies in case of Access member function name
+
+	* network.cc: Fixed inconsistency in case of Access member function name
+	
+2002-01-25  Brian Cline  <clineb@cs.winthrop.edu>
+	
+	* ALL FILES: Did MAJOR cleanup in semantics...made everything consistent.
+	This includes modifying class member functions to start with uppercase
+	characters.
+
+	(oops, I forgot to write this part of the log when I committed those files.)
+
+2002-01-25  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* c_uptime.cc: Added line to show transfer statistics.
+
+	* network.cc: Added GetSocketStats(), to return in string format the amount 
+	of bytes sent and received - but will show them in KB/MB/GB/TB where
+	necessary.
+
+	* network.h: Added prototype for GetSocketStats.
+
+	* socket.cc: Added initialization of bytesRecv and bytesSent in each
+	constructor, and modified the Recv and Send functions to increment them
+	appropriately (if you're completely clueless, they are byte counters for
+	incoming and outgoing data). Also added two accessor functions that will
+	return their values.
+
+	* socket.h: Added private members bytesRecv and bytesSent to keep track of
+	transfer statistics.
+
+2002-01-24  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* Makefile: added c_login.o, c_logout.o, and c_operinfo.o to the object file
+	list.
+
+	* access.cc: Added a new constructor that can be passed all of the necessary
+	data in order to correctly set it. Also added a getPass() function to return
+	the user's password, getMasks() to return a space-delimited string of hosts
+	stored in a_hosts, getLastSeen() to return a human-readable timestamp that
+	the user last logged in, getLastTS() to return a time_t timestamp of the
+	last login time.
+
+	* access.h: Added necessary prototypes for the above functions as well as
+	new private members a_pass and a_lastSeen.
+
+	* c_login.cc: Wrote code for the LOGIN command. Pretty simple stuff.
+
+	* c_logout.cc: Wrote code for the LOGOUT command. Again, pretty simple stuff.
+	On a side note, when a user is authed, user->c_access points to a non-null
+	location, whereas if they are not authed it is NULL -- this is how we check
+	to see if they are authed or not. Thus whenever they logout, it is set back
+	to NULL.
+
+	* c_operinfo.cc: Added command and wrote code for OPERINFO. This command
+	simply outputs information about a user's record in the access map.
+
+	* c_showcommands.cc: Added a notice line to tell the user what their level
+	is. This will probably be removed some time in the near future.
+
+	* channel.cc: Remove trailing '\n' from what ctime() returns.
+
+	* client.cc: Remove trailing '\n' from what ctime() returns. Also added the
+	SetAccessRecord() function, which locates the access entry in the access map
+	from the username passed in userName, then updates the client's c_access
+	pointer as well as their last login timestamp. ClearAccess(), also a new
+	function, sets their c_access pointer to NULL when they deauthenticate.
+
+	* client.h: Added the necessary prototypes for the above mentioned functions.
+
+	* cmdmap.h: Added line for OPERINFO command.
+
+	* config.cc: Added code in each constructor to load all of the necessary
+	configuration files. Also added the LoadUsers() function to load the bot's
+	user access list from DATADIR/users.dat. This file contains user information
+	in the following format:
+		Nick Level Suspend LastSeen Password Hostmasks
+	Also added the LoadJupes(), LoadClones() and LoadChans() functions, which
+	currently do nothing and whose functionality will be explained when the code
+	is actually written.
+
+	* config.h: Added the necessary prototypes for the above mentioned functions.
+
+	* m_nick.cc: Updated msg_N (NICK) to use Network::FindClientByNum instead of
+	traversing the map by itself. We don't need to reinvent the wheel here. Also
+	added an assert in place of the old Debug message, since it should ALWAYS 
+	find the user.
+
+	* m_privmsg.cc: Added an assert instead of a Debug message in case the *user
+	pointer is NULL after calling FindClientByNum. We should obviously always
+	be able to find them. Also fixed a bug by switching around the < operator to
+	a > operator when checking to see if a command's level is greater than the
+	user's active level. Oops.
+
+	* m_quit.cc: Added an assert instead of a Debug message in case the *user
+	pointer is NULL after calling FindClientByNum. In case you haven't been able
+	to tell by now, I'm trying to get rid of all unnecessary calls to Debug().
+
+	* maps.cc: Added line for new OPERINFO command.
+
+	* network.cc: Removed line to initialize myConfig, since we only want to
+	initialize it when LoadConfiguration is called -- since the Config
+	constructors will automagically load the necessary files. Added an
+	AddAccessEntry function to add an entry into the accessMap. RemAccessEntry
+	simply removes an entry from the accessMap, and FindAccessEntry obviously
+	searches for and returns an entry in the accessMap -- or NULL if the userName
+	is not found.
+
+	* network.h: Added the necessary prototypes for the above mentioned functions
+	and added a private member accessMap, to hold the bot's user access records.
+	Also added the AccessIter function to return an iterator to the front of the
+	accessMap, and an AccessTail function to return an iterator to the back of
+	the accessMap.
+
+	* stealth.conf: Added a DATADIR parameter, which is the directory in which
+	the bot should look for files such as user.dat and so on.
+	
+2002-01-24  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* Makefile: Added c_login.o and c_logout.o to the object file list
+
+	* access.cc: Semantic changes
+
+	* c_login.cc: Created for LOGIN command
+
+	* c_logout.cc: Created for LOGOUT command
+
+	* c_showcommands.cc: Now modified to check for a user's current access level
+	based on whether or not they are authed. If they are not an oper, they are at
+	level -1; if they are an oper and not authed, they are level 0. Otherwise 
+	they are at whatever level they have authed at.
+
+	* channel.h: Fixed bug that assigned random values to c_modes when the 
+	modeless constructor was called.
+
+	* client.cc: Initially set c_access to NULL, since a new user obviously will
+	not have any access until they log in successfully. Added the GetAccessRecord
+	function to return a pointer to the user's Access object. Also added 
+	IsAuthed() to return whether or not the user is authenticated; IsSuspended() 
+	to return whether or not they are suspended; and GetLevel() to return their 
+	current level of authentication.
+
+	* client.h: Added prototypes for the new functions in this class. Also added
+	an Access* pointer and included the necessary header file for this.
+
+	* cmdmap.h: Semantic changes to make things a bit more readable...I dont have
+	syntax hilighting available in vim on this box. Also added the LOGIN and 
+	LOGOUT commands to the map.
+
+	* doctest: This is just a random temporary file to test and hopefully get 
+	working the diff-on-commit script.
+
+	* m_privmsg.cc: Now check for the number of parameters and the correct user
+	level before executing a command. If the number of parameters is too low, 
+	send back a string from PrivMsgMap with the syntax line attached.
+
+	* maps.cc: Added fields for syntax and required number of parameters per 
+	command. This should make things easier.
+
+	* maps.h: Added fields for syntax and required number of parameters in
+	PrivMsgTabItem.
+
+	* msgmap.h: Removed old old old macro and some old code that I previously
+	experimented with. Also un-tabified the prototype lines.
+
+	* network.cc: Modified Register() to send +s in its own server flags, since
+	this server is a service.
+	
+2002-01-22  Brian Cline  <clineb@cs.winthrop.edu>
+	
+	* channel.cc: Fixed bug in SetModes() -- when only a key is set on a channel,
+	it was trying to access an out-of-bounds index in modeTokens (2 instead of 1)
+	to set the key with.
+
+2002-01-22  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* Makefile: Added c_chaninfo.o to the object file list
+
+	* c_chaninfo.cc: Wrote code for cmd_CHANINFO function, a command that shows
+	the create time, topic, modes, users, and bans for a specific channel.
+
+	* channel.cc: Added initializer for c_modes and c_limit in one of the Channel
+	constructors, which will also now call SetModes() to set the modes on the
+	channel that are passed to the constructor. Added a GetCreateTime function to
+	return the ctime/human-readable format of the channel's creation timestamp.
+	Added the GetModeString function to return a list of modes in string format
+	(i.e., "+smnti"). Added GetUsersString function to return a list of users
+	that are currently on the channel, prefixed with the modes they have set on
+	them in the channel. Also added GetBansString() function to return a list of
+	bans in string format. Added the SetModes function which takes a string
+	argument of current modes, breaks it down, and sets the appropriate modes in
+	the Channel's object. It now accounts for keys and limits, and sets them
+	accordingly only if they exist in the mode string.
+
+	* channel.h: Added the necessary prototypes for the above mentioned functions
+	in channel.cc. Also removed the very old ServClient and ChanClient structs;
+	ServClient will be replaced by a class similar to ChannelClient, and
+	ChanClient has already been replaced.
+
+	* cmdmap.h: Added prototype line for CHANINFO command.
+
+	* flags.h: Modified flag values to values that actually work. There was a bug
+	that was causing them to be misread, due to the old values. All works as
+	planned, now.
+
+	* m_burst.cc: Fixed LOTS of bugs in msg_B (BURST). Overall, fixed some bugs
+	in mode detection. Added chanModes to keep track of channel modes, and will
+	be appended with limit count and key string if the mode string contains each.
+	Removed the old mode-setting for/switch loop, since the Channel constructor
+	now calls SetModes to do this. Calling AddChannel is now conditional 
+	depending on whether or not we receive channel modes in this channel's burst
+	line -- if we don't, call AddChannel without modes. Added some asserts to
+	ensure that the chan is inserted into the map correctly. Fixed a bug in the
+	ban parsing code -- it was grabbing the last numeric and the first ban; I
+	forgot that Assemble(int) decrements its argument; and since this is an
+	actual index, we need to add 1 to balance that out. Also, added a line to
+	remove the leading '%' character on the first ban. Fixed a bug in the code
+	that parses user numerics -- we should tokenize by commas, not by spaces.
+
+	* maps.cc: Added line in PrivMsgMap for CHANINFO command.
+
+	* network.cc: Modified RegisterSelf() to add the bot to its protocol output
+	and debugging channels with modes +ov. Also added a safeguard in AddChannel
+	so that we dont overwrite an existing channel, like debugchan and/or
+	protochan. Added an overloaded prototype of AddChannel() for channels that
+	do not have any modes set.
+
+	* network.h: Added prototype for overloaded AddChannel(string, time_t).
+
+	* server.h: Commented out the list<ServClient> list, since we took it out of
+	channel.h. This will be replaced by a class similar to ChannelClient and will
+	interface with the Server class in exactly the same way Channel interfaces
+	with its ChannelClient map.
+
+	* stealth.cc: Added intToStr(int) function to convert an integer to a string
+	using a stringstream. Thanks goes to Bjarne Stroustrup for this code, which
+	was found in his C++ FAQ at the following URL:
+		http://www.research.att.com/~bs/bs_faq2.html#int-to-string
+	
+	* stealth.h: Added prototype for intToStr function.
+	
+2002-01-22  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* Makefile: Added chanclient.o to the object file list
+
+	* c_whois.cc: Fixed core problem stemming from c_whois when an oper
+	specified no parameters to the whois command
+
+	* chanclient.cc: Added ChannelClient class to keep track of users in a
+	channel. Instances of ChannelClient* are housed in a map inside of each
+	Channel's object in memory.
+
+	* chanclient.h: Added ChannelClient class.
+
+	* channel.cc: Added necessary #includes for the new ChannelClient class
+	as well as others that should have already been in there. Added necessary
+	namespaces to its scope for channelFlags and chanClientFlags. Added the
+	AddUser() function which adds a user with their necessary chanmodes (i.e.,
+	from bursts) into the Channel::c_users map. Added RemUser function which
+	will remove a user from the channel users map. Added FindUser function to
+	search for and return a user from the channel user map. Also added the
+	AddBan and RemBan commands that will add/remove (respectively) channel bans
+	into the Channel::c_bans list.
+
+	* channel.h: Added necessary includes, and made small semantic changes here
+	and there. Made necessary declarations for AddMode, RemMode, CheckMode,
+	AddUser, RemUser, FindUser, AddBan, and RemBan. Also added the c_users map
+	(this was previously a list<Client*>, which could not keep track of channel
+	modes) and the c_bans list.
+
+	* client.cc: Fixed a bug in Client::GetConnectTime() that would return the
+	current time instead of the client's signon time.
+
+	* flags.h: Added a chanClientFlags namespace to define op and voice modes to
+	be used in the ChannelClient class.
+
+	* m_burst.cc: Wrote the code for msg_B (BURST). After writing, spend about a
+	day and a half figuring out why map insertions in Channel::AddUser was 
+	causing a segfault...and had simply forgotten to initialize *chan in msg_B.
+	I feel like kicking myself.
+
+	* socket.cc: Removed old commented-out code from Socket::Recv, and added some
+	conditions to allow ctcp, bold, underline, color, and inverse control
+	characters to be placed in the buffer.
+
+	* stealth.conf: Added two previously-missing lines in configuration for the
+	modes to be set on the DEBUGCHAN and the PROTOCHAN.
+
+2002-01-20  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* c_ctcp.cc: Modified cmd_CTCP_VERSION to use the new STEALTH_VERSION and
+	STEALTH_URL macros.
+
+	* socket.cc: Modified Socket::Recv() so that it will still pass through
+	\001 for CTCP requests.
+
+	* stealth.h: Removed trailing slash from STEALTH_URL...looks better that
+	way in the /ctcp version reply. I'm picky like that.
+
+2002-01-20  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* c_remgline.cc: This time, let's add it to the repository for real.
+
+2002-01-20  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* Makefile: Added c_remgline.o in obj file list
+
+	* c_remgline.cc: Added function definition of cmd_REMGLINE
+
+	* cmdmap.h: Added prototype line for cmd_REMGLINE
+
+	* m_eob.cc: Removed old debug message from msg_EB
+
+	* m_nick.cc: Removed old debug message from msg_N
+
+	* m_ping.cc: Added code for msg_G function (server PING), so the server will
+	now reply to ping messages from its uplink server.
+
+	* m_quit.cc: Added code for msg_Q function (user QUIT). This makes the
+	appropriate changes in the clientMap by calling Network::RemClient.
+
+	* m_server.cc: Removed old debug messages from msg_S and msg_SERVER.
+
+	* m_squit.cc: Added code for msg_SQ, which will remove all servers and 
+	clients subsequent to the server being SQUITted, as well as the server 
+	itself.
+
+	* m_version.cc: Added code for msg_V, which will reply to remote /version
+	requests from clients.
+
+	* m_whois.cc: Added code for msg_W, which will reply to a remote /whois for
+	a client on the bot's server or subsequent servers.
+
+	* maps.cc: Added line to PrivMsgMap for the new REMGLINE command.
+
+	* network.h and network.cc: Prototyped and defined new RemServerTree and
+	RemAllClients functions. RemServerTree takes a server numeric as an argument,
+	will search for any servers attached to it -- and before deleting it will
+	recursively search for servers attached to that subsequent server. THEN it
+	will call RemAllClients to remove all the clients on that server, and will
+	then delete the server from the serverMap. As explained, RemAllClients simply
+	removes all the users on the server whose numeric is specified in the
+	serverNumeric argument. 
+	Also modified the ParseLoop function to use a larger buffer value (8.0K), and
+	fixed a small type problem -- previously, ParseBuffer was being called as 
+	ParseBuffer(char[]) when it should have been called as ParseBuffer(string). 
+	It still worked the old way, but GCC technically should have caught this.
+	Also modified ParseBuffer() to conform with the changes made in Socket::Recv(),
+	since we no longer get multiple lines in ParseBuffer (nor ParseLoop, for that 
+	matter). Therefore ParseBuffer and ParseLoop will probably be consolidated into
+	one single ParseLoop function.
+	ParseServMsg was modified NOT to core when numTokens is less than 2, which
+	should technically never happen.
+
+	* server.h: Added function GetUplinkNumeric() to return c_ownernum -- in other
+	words, the numeric of the server's uplink.
+
+	* socket.cc: Uncommented the old debugging line to show what data is being
+	sent out. Also changed all instances of Recv(void *, int) to Recv(char *, int).
+	Recv() now retrieves the buffer character-by-character until it reaches '\n',
+	at which point it will stop. This should be more efficient in the overall
+	scheme of things (instead of separating it line-by-line in
+	Network::ParseBuffer). This also solves a problem I encountered when packets
+	from a single burst chopped off the middle of one line (usually at the 768th
+	byte) and continued in the next packet -- this caused major parsing bugs,
+	because, say, a nick line might get chopped in half. In the other Recv()
+	functions, 10240 was modified to 1024, a more sane value, since  we won't 
+	really be getting 10 K in a single line, since that's all that the main Recv()
+	function will give back to us now.
+
+	* socket.h: Modified all instances of Recv(void *, int) to Recv(char *, int).
+
+	* stealth.h: Added #defines for STEALTH_VERSION and STEALTH_URL, which is used
+	in the remote /version reply.
+
+	* token.cc: Fixed a bug in Assemble() where it would not append a delimiter
+	after the first token. Also added two overloaded versions of Assemble() in
+	which Assemble(int sPos) will return a string assembled from the token in
+	the sPos-1 position all the way to numTokens. Assemble(int sPos, int ePos) will
+	return a string assembled from token sPos-1 through ePos-1.
+
+	* token.h: Added prototypes for the above mentioned overloaded Assemble
+	functions.
+
+2002-01-19  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* Makefile: Added c_uptime.o in obj file list
+
+	* c_uptime.cc: Added file and code for UPTIME command, which, most obviously,
+	shows the uptime to a level 0 user.
+
+	* cmdmap.h: Added line to create prototype for UPTIME command (cmd_UPTIME)
+
+	* m_nick.cc: Removed a blank line (I thought I actually needed to do
+	something in this file, but really did not.
+
+	* m_privmsg.cc: Added safeguard to output a debug message and return out of
+	the function if *user, for some odd reason, is ever NULL.
+
+	* main.cc: Removed code to send burst lines and put it in Network::Register,
+	and made the appropriate changes here. Also call Network::RegisterSelf.
+
+	* maps.cc: Added object in PrivMsgTab to handle the UPTIME command.
+
+	* network.cc: Define starttime whenever the object is initialized -- this is
+	currently used for the UPTIME command. Also add/define Network::RegisterSelf
+	and Network::Register. Network::RegisterSelf adds its own server and client
+	information into the maps, so that it knows it actually exists. Also add a
+	Network::GetUptime() function to calculate and return a string containing the
+	uptime. Will currently show uptime all the way up to weeks if necessary.
+	Added an #include for time.h for defining starttime in the constructor.
+
+	* network.h: Added appropriate prototypes for Network::Register,
+	Network::RegisterSelf, and Network::GetUptime. Also add the private member
+	starttime, which is used for the UPTIME command. I decided to remove the
+	HashServMsg and HashPrivMsg functions as well, since they don't do anything
+	and are not necessary at this point.
+
+	* stealth.conf: Modified a little something for my own convenience while
+	testing this on my testnet. Nothing of concern, really.
+
+2002-01-19  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* c_translate.cc: Added code for TRANSLATE command, which has been tested
+	and, if you specify multiple numerics, it will translate all of them for you.
+
+	* m_server.cc: Cleaned up old comments.
+
+	* network.cc: Modified FindServerByNum, FindClientByNum to go through their
+	respective maps and do a case-by-case comparison of the numerics, instead of
+	just looking for map[key]. This was causing null pointers to be returned
+	because the copy of the key stored in the map apparently does not store the
+	null termination character, while the string passed to the function does.
+	Therefore it was attempting to do a comparison between, say, "AB\0" and "AB"
+	and wasn't coming up with any results. Hence I rewrote them to do a strSCmp
+	between the two, since that *does* work in this situation. Also modified
+	FindChannelByName to use the same method but with a case-insensitive strCmp.
+
+	* server.h: GetNum() was renamed to GetNumeric() for consistency -- and was
+	also returning the wrong member variable (charXX), one that was not even
+	used anymore. The charXX member variable was also removed. The member
+	variable intXX was renamed to s_intNum. GetNumInt was renamed to 
+	GetNumericInt for consistency and was modified to reflect the name change on
+	intXX to s_intNum.
+
+	* stealth.h: Added prototypes for new strSCmp (case-sensitive string
+	comparisons).
+
+	* stealth.cc: Added four new functions, all overloaded copies of the same
+	strSCmp function -- this is exactly like the defined strCmp function in this
+	file, but strSCmp is case-sensitive. This is mainly used for the member
+	functions in Network that search through a map for numerics.
+	
+2002-01-19  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* network.cc: Forgot to remove call to old Config::SetConfiguration in
+	Network::LoadConfig() functions. Now it instead returns the value of
+	Config::LoadConfiguration().
+
+2002-01-19  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* deprecated/: OK, now really remove the directory now that its subsequent
+	files are gone.
+
+2002-01-19  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* deprecated/numeric.* Do we really need the crap in the deprecated/ 
+	directory anymore? Now that everything is working fine without it, it should
+	be safe to remove it.
+	
+2002-01-19  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* ChangeLog: where in the hell did 01-08 come from?!
+
+	* config.h and config.cc: Remove the old configuration variables that were
+	previously public members of the Config class. These are no longer necessary,
+	since Net->GetConfig(...) makes them obsolete. Thus, Config::SetConfiguration
+	is also obsolete. These members were absolutely horrible for good 
+	organization, design, and encapsulation.
+	
+2002-01-18  Brian Cline  <clineb@cs.winthrop.edu>
+
+	* ChangeLog: added a ChangeLog file to keep track of specific changes to each
+	file for each commit.
+	
+	* c_broadcast.cc: Added code for cmd_BROADCAST, which will send a global
+	broadcast message to all clients
+	
+	* c_ctcp.cc: Added code for cmd_CTCP_PING, which simply replies to pings;
+	added code for cmd_CTCP_VERSION, which replies to a /ctcp version request;
+	also added code for cmd_CTCP_GENDER, which will replies to ctcp gender
+	requests
+	
+	* c_map.cc: [Re]moved code for cmd_MAP, which was just a bunch of debugging
+	code. It now resides under cmd_TRAV, a command that will traverse the server,
+	client, and channel maps.
+	
+	* c_quote.cc: Added an extra return statement at the end of the function for
+	purposes of good design -- technically, the scope of the function should
+	_never_ reach that return statement. If it does, we've got a problem.
+	
+	* c_showcommands.cc: Added code for cmd_SHOWCOMMANDS, which obviously lists
+	commands for each level to a user based on their access level to the service.
+	
+	* c_trav.cc: Moved previous cmd_MAP code to this function (cmd_TRAV) instead.
+	This is a level 1002 debugging command that will traverse and output server
+	name, nick!ident@host, and channel name from the server, client, and channel
+	maps, respectively. This command is for debug purposes ONLY and will most
+	likely be removed in an almost-final release.
+	
+	* c_whois.cc: Modified cmd_WHOIS command handler to move user numeric to the
+	nickname line (in parentheses); show all user modes that are sent globally
+	(+s is the only usermode that remote servers are not notified about); show
+	IP in standard dotted quad format, along with the Base64 representation of
+	it; show user modes, and append " [OPER]" to the line if the user is an
+	operator; and finally, show the user's signon time.
+	
+	* client.h and client.cc: Added IsOper() function, to return a bool value
+	for whether or not a user is a global operator. Added GetModes(), to return
+	a string of modes that a user currently has set (i.e., "+diowkg"). Added
+	GetConnectTime(), mostly for cmd_WHOIS, that will return the user's connect
+	time in a human-readable format. Also added RawModes() function that will
+	return the modes that a user currently has set, but in hex form.
+
+	* client.h: Modified name of GetIPOctal to just GetIP; modified name of
+	GetIPBase64 to GetIP64.
+	
+	* client.cc: Added line to incorporate the namespace clientFlags scope, for
+	sake of convenience, since most of the functions will use flags from that
+	namespace; made changes accordingly throughout the file. Also modify the big
+	Client::Client() constructor so that it will initially set c_modes to 
+	clientFlags::USER_NONE (0x0) -- this was, as usual, getting random values
+	since it was uninitialized.
+	
+	* config.cc: Added #include for stealth.h -- not sure why this was missing,
+	but we definitely need it for strUpper (to replace the old transform() line,
+	which is what strUpper and strLower use). Made small changes in semantics,
+	for sake of consistency -- a goal that is currently a bit far off, but
+	nevertheless a goal that will be met.
+	
+	* flags.h: Was fooling with flag values due to that bug with Client::(c_modes)
+	being uninitialized -- I thought they were faulty, but were not. I ended up
+	leaving the leading zeroes in there anyway. Won't hurt anything.
+	
+	* m_privmsg.cc: Removed struct msgTabType and the msgTab[] array, since
+	maps.cc and maps.h now replaces them. And basically modified msg_P (for 
+	PRIVMSG) to use the new tables defined in maps.cc. This function now also 
+	checks for whether or not the user is a global oper in order to perform 
+	functions for levels 0 and up. Level -1 is for non-opers. This also spits back
+	an error message at the user if they did not specify a valid command. Also
+	added includes for network.h and maps.h, since msg_P will need to use *Net and
+	the server message and private message command tables.
+	
+	* main.cc: Modified main() to use the somewhat new strCmp function defined
+	in stealth.cc (wonderful).
+	
+	* maps.cc: Yikes, remove the extra "P" handler that was causing cmd functions
+	to be called twice. (Also added a break statement in msg_P to prevent this even
+	if there is a duplicate.) Modified name of CommandTab to PrivMsgTab to be more
+	consistent with the ServMsgTable. Also arranged all of the objects in 
+	PrivMsgTab in order of descending level and then in ascending alphabetical
+	order.
+
+	* network.cc: Small changes in semantics for greater consistency. Removed debug
+	lines that are no longer of any concern or particular use. Also, add a break
+	statement in Network::ParseServMsg to safeguard against calling a handler
+	twice in a row, similar to the problem I experienced with the PrivMsgTab table.
+	Also removed an extra cout that is obviously not needed.
+	
+	* socket.cc: Since everything is currently being compiled and tested with -g3,
+	I want to temporarily comment-out this cout for convenience. I no longer need
+	to see everything that gets sent to the remote server.
+	
+	* stealth.cc: Debug() no longer sends stuff to the channel -- while debugging
+	a segfault I needed to comment this out to avoid an endless loop. It may be
+	best to just leave this commented out for a while. Also fixed Base64ToInt
+	to convert correctly from the way I was trying to use to the way ircu uses.
+	Also added Base64ToIP function to convert a Base64-encoded IP address to a
+	standard dotted quad IP address. Also added a getServNum function that substr's
+	a user's numeric to return the server numeric from within it.
+
+	* stealth.conf: Added 'k' to the list of modes the server should set on the
+	user. And also added a GENDER option to be used in replies from 
+	cmd_CTCP_GENDER. Also switching REMOTEHOSTS yet again since I'm now running 
+	and testing this from one of four of the University's new shiny 1.7GHz & 256MB
+	Red Hat Linux boxes. :)
+	
+	* stealth.h: Added prototype for new Base64ToIP function.
+

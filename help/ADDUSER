@@ -1,0 +1,9 @@
+HELP on ADDUSER                            Level %L
+
+  Syntax: /msg %N adduser <username> <level> <password> <mask list>
+
+ Example: /msg %N adduser Trask 500 cheese *!*trask@*.ircplanet.net *!*trask@*.winthrop.edu
+
+   Usage: Adds a user to the access list with the given level.
+          <mask list> may include multiple host MASKS of the form
+          nick!user@host.

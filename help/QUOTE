@@ -1,0 +1,8 @@
+HELP on QUOTE                            Level %L
+
+  Syntax: /msg %N quote <protocol>
+
+ Example: /msg %N quote AzAAA A :eating!
+
+   Usage: Sends raw protocol to %N's uplink. This command is NOT
+          a toy -- it can cause the uplink to crash if used incorrectly.

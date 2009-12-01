@@ -1,0 +1,50 @@
+STEALTH OPERATOR SERVICE v1.0
+Written by Brian A. Cline <clineb@cs.winthrop.edu>
+
+Released: Saturday, June 8, 2002
+--------------------------------------------------------------------------------
+
+Installing SOS is quite simple. There are no autoconf or automake scripts --
+simply type 'make' in the stealth directory and it should build a binary
+called 'stealth'. If you encounter errors, please send a *COMPLETE* copy of the 
+output of the 'make' command, along with your OS and version (uname -a), your 
+gcc version (gcc -v), and version of make (make -v).
+
+SOS has compiled cleanly on FreeBSD and Linux platforms.
+
+
+Once the binary has been compiled, you will need to edit stealth.conf and
+dbfiles/users.dat. You may choose to rename stealth.conf, but if you do so you
+must specify the name of the configuration file when you start stealth (i.e., "./stealth my.conf").
+
+The dbfiles/users.dat file contains a list of all users, their access level,
+host masks they use, etc. The format of the file is as follows:
+	
+	Nick Level Protect Suspend LastSeen Password Hostmasks
+
+And now for an explanation:
+        NICK: The nickname to authenticate as. This does not have to be the
+              nick you use on IRC -- but it needs to be the one that you will
+              use for the 'login' command.
+       LEVEL: This is the access level and ranges from -1 (non-oper) to 1000.
+     PROTECT: If set to '1', any user logged in via this account will not be
+              affected by a `clearchan g`. Otherwise, if set to '0', they will
+              be affected by it.
+     SUSPEND: If set to '1', this user cannot log in or perform any commands
+              with this account.
+    LASTSEEN: The unix timestamp of when the user last logged in to stealth.
+    PASSWORD: The user's password.
+   HOSTMASKS: A list of hostmasks (separated by spaces) that the user is
+              recognized with. They should be of the form nick!user@host.
+
+
+After you have successfully added your own account to the file, and have
+modified the configuration file (by default, stealth.conf) to your needs, you
+should be able to start up stealth without problems--assuming you have
+configured ircu correctly. Please note that I do not provide ircu support,
+so if you are having problems getting it connected to ircu then it is more than
+likely an ircu configuration problem.
+
+
+Brian A. Cline
+June 2002

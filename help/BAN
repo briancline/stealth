@@ -1,0 +1,7 @@
+HELP on BAN                            Level %L
+
+  Syntax: /msg %N ban <channel> <host masks>
+
+ Example: /msg %N ban #idle *!*@*.aol.com *!*@*.loser.net
+
+   Usage: Sets bans on one or more ban masks in the specified channel.

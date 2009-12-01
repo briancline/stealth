@@ -1,0 +1,7 @@
+HELP on MAP                            Level %L
+
+  Syntax: /msg %N map
+
+ Example: /msg %N map
+
+   Usage: Shows a map of the current network structure.

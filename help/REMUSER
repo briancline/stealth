@@ -1,0 +1,7 @@
+HELP on REMUSER                            Level %L
+
+  Syntax: /msg %N remuser <username>
+
+ Example: /msg %N remuser ksart
+
+   Usage: Removes a user's access record.

@@ -1,0 +1,7 @@
+HELP on TRANSLATE                            Level %L
+
+  Syntax: /msg %N translate <numeric>
+
+ Example: /msg %N translate ABBP]
+
+   Usage: Translates a user numeric to a nickname.

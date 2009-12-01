@@ -1,0 +1,7 @@
+HELP on CHNAME                            Level %L
+
+  Syntax: /msg %N chname <command name> <new command name>
+
+ Example: /msg %N chname adduser addoper
+
+   Usage: Simply gives a command a new name.

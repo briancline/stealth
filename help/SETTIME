@@ -1,0 +1,9 @@
+HELP on SETTIME                            Level %L
+
+  Syntax: /msg %N settime
+
+ Example: /msg %N settime
+
+   Usage: Sends out a SETTIME message to the network giving it the
+          time of the server it runs from. This can be used to ensure
+          that all servers on the network have the correct time.

@@ -1,0 +1,8 @@
+HELP on CHANINFO                            Level %L
+
+  Syntax: /msg %N chaninfo <channel>
+
+ Example: /msg %N chaninfo #idle
+
+   Usage: Shows all known information about a channel, including its creation
+          time, topic, users (with op and voice flags), and channel modes.

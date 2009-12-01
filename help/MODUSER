@@ -1,0 +1,16 @@
+HELP on MODUSER                            Level %L
+
+  Syntax: /msg %N moduser <nick> <parameter> <new value>
+
+ Example: /msg %N moduser trask protect on
+
+   Usage: Modifies a user's account information.
+
+          Valid parameters are as follows:
+                NICK  - renames the user's access record
+               LEVEL  - sets a user's access level
+             SUSPEND  - suspends/unsuspends a user (ON/OFF)
+             PROTECT  - protects/unprotects a user (ON/OFF)
+            PASSWORD  - modifies a user's password
+             ADDHOST  - adds a hostmask for a user
+             REMHOST  - removes a hostmask for a user

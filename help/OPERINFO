@@ -1,0 +1,9 @@
+HELP on OPERINFO                            Level %L
+
+  Syntax: /msg %N operinfo <username>
+
+ Example: /msg %N operinfo trask
+
+   Usage: Shows information for a user's access record in stealth.
+          This includes level, suspend and protect flags, last seen time,
+          and all host masks.

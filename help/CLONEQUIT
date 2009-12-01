@@ -1,0 +1,9 @@
+HELP on CLONEQUIT                            Level %L
+
+  Syntax: /msg %N clonequit <clone nick> <quit text>
+
+ Example: /msg %N clonequit W Taking a leak
+
+   Usage: Causes a cloned user to quit IRC with the specified quit message.
+          Clonequitting a clone will also cause it to be removed from the
+          clones.dat file unless it is re-added.

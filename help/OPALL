@@ -1,0 +1,7 @@
+HELP on OPALL                            Level %L
+
+  Syntax: /msg %N opall <channel>
+
+ Example: /msg %N opall #idle
+
+   Usage: Ops all users in a channel.

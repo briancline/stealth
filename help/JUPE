@@ -1,0 +1,10 @@
+HELP on JUPE                            Level %L
+
+  Syntax: /msg %N jupe <server name> <duration> <reason>
+
+ Example: /msg %N jupe Montreal.QC.CA.Virtuanet.org 3600 Fix your server
+
+   Usage: Jupes a server for the specified amount of time with a given
+          reason. Please note that this command uses ircu2.10.11-style jupes
+          which are NOT compatible with ircu2.10.10. It uses the new jupe
+          feature, therefore it does not create a fake server.

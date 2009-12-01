@@ -1,0 +1,6 @@
+//
+// The format of this file is as follows:
+//
+// Nick Level Protect Suspend LastSeenTS Password Hostmasks
+//
+Admin 1000 1 0 0 password *!*admin@*.isp.net

@@ -1,0 +1,7 @@
+HELP on VOICEALL                            Level %L
+
+  Syntax: /msg %N voiceall <channel>
+
+ Example: /msg %N voiceall #idle
+
+   Usage: Voices all users in a channel.

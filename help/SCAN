@@ -1,0 +1,9 @@
+HELP on SCAN                            Level %L
+
+  Syntax: /msg %N scan <host mask>
+
+ Example: /msg %N scan *.aol.com
+
+   Users: Shows a list of users matching the search mask, including
+          their IP address and the abbreviated name of the server
+          they are using.

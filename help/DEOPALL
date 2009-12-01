@@ -1,0 +1,7 @@
+HELP on DEOPALL                            Level %L
+
+  Syntax: /msg %N deopall <channel>
+
+ Example: /msg %N deopall #idle
+
+   Usage: Deops all users on a channel.

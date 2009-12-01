@@ -1,0 +1,7 @@
+HELP on OP                            Level %L
+
+  Syntax: /msg %N op <channel> [nick1 nick2 nick3 ...]
+
+ Example: /msg %N op #idle brian nex
+
+   Usage: Ops the specified users in a channel.

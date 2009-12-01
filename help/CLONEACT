@@ -1,0 +1,7 @@
+HELP on CLONEACT                            Level %L
+
+  Syntax: /msg %N cloneact <clone nick> <channel> <action text>
+
+ Example: /msg %n cloneact W #idle jumps brian
+
+   Usage: Sends an action to a channel from the specified clone, if it exist.

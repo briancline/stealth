@@ -1,0 +1,10 @@
+HELP on HELP                            Level %L
+
+  Syntax: /msg %N help <command name>
+
+ Example: /msg %N help clearchan
+
+   Usage: Shows the help for any given command.
+
+          You may use /msg %N showcommands  to view a list of commands
+          that are available to you.
